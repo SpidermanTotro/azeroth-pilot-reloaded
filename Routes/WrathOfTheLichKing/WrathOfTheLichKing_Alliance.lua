@@ -1200,4 +1200,274 @@ if APR.Faction == "Alliance" then
             _index = 11,
         },
     }
+
+    -- ==================== GRIZZLY HILLS ====================
+    -- Mid-level zone (73-75)
+    -- Alliance: Amberpine Lodge / Horde: Conquest Hold
+
+    APR.RouteQuestStepList["73-GrizzlyHills-Alliance"] = {
+        {
+            PickUp = { 12138 }, -- Grizzly Hills breadcrumb
+            Coord = { x = 3701.5, y = -786.4 },
+            Zone = 115, -- From Dragonblight
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 115, to = 116 }, -- Fly to Grizzly Hills
+            Coord = { x = 3682.4, y = -723.5 },
+            Zone = 115,
+            _index = 2,
+        },
+        {
+            Done = { 12138 },
+            Coord = { x = 3456.7, y = -4178.9 },
+            Zone = 116, -- Grizzly Hills
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 27942 }, -- Amberpine Lodge flight master
+            Coord = { x = 3489.2, y = -4198.5 },
+            Zone = 116,
+            _index = 4,
+        },
+        {
+            PickUp = { 12161, 12162 }, -- Amberpine Lodge quests
+            Coord = { x = 3467.8, y = -4156.3 },
+            Zone = 116,
+            _index = 5,
+        },
+        {
+            Qpart = { [12161] = { 1 } }, -- Thin out the Furbogs
+            Coord = { x = 3356.4, y = -4289.6 },
+            Range = 80,
+            Zone = 116,
+            _index = 6,
+        },
+        {
+            Done = { 12161 },
+            Coord = { x = 3467.8, y = -4156.3 },
+            Zone = 116,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== ZUL'DRAK ====================
+    -- High-level zone (74-76)
+    -- Argent Stand / Zim'Torga
+
+    APR.RouteQuestStepList["74-ZulDrak-Alliance"] = {
+        {
+            PickUp = { 13181 }, -- Zul'Drak breadcrumb
+            Coord = { x = 3489.2, y = -4198.5 },
+            Zone = 116, -- From Grizzly Hills
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 116, to = 121 }, -- Fly to Zul'Drak
+            Coord = { x = 3489.2, y = -4198.5 },
+            Zone = 116,
+            _index = 2,
+        },
+        {
+            Done = { 13181 },
+            Coord = { x = 5823.4, y = -2567.8 },
+            Zone = 121, -- Zul'Drak
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 28624 }, -- Argent Stand flight master
+            Coord = { x = 5812.6, y = -2534.9 },
+            Zone = 121,
+            _index = 4,
+        },
+        {
+            PickUp = { 12861, 12862 }, -- Argent Stand quests
+            Coord = { x = 5834.7, y = -2578.3 },
+            Zone = 121,
+            _index = 5,
+        },
+        {
+            Qpart = { [12861] = { 1 } }, -- Slay trolls
+            Coord = { x = 5945.8, y = -2456.7 },
+            Range = 80,
+            Zone = 121,
+            _index = 6,
+        },
+        {
+            Done = { 12861 },
+            Coord = { x = 5834.7, y = -2578.3 },
+            Zone = 121,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== SHOLAZAR BASIN ====================
+    -- Special zone (76-78)
+    -- Nesingwary Base Camp / Frenzyheart/Oracle faction
+
+    APR.RouteQuestStepList["76-SholazarBasin-Alliance"] = {
+        {
+            PickUp = { 12521 }, -- Sholazar Basin breadcrumb
+            Coord = { x = 5812.6, y = -2534.9 },
+            Zone = 121, -- From Zul'Drak
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 121, to = 119 }, -- Fly to Sholazar Basin
+            Coord = { x = 5812.6, y = -2534.9 },
+            Zone = 121,
+            _index = 2,
+        },
+        {
+            Done = { 12521 },
+            Coord = { x = 5492.3, y = 5812.6 },
+            Zone = 119, -- Sholazar Basin
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 28037 }, -- Nesingwary Base Camp flight master
+            Coord = { x = 5512.8, y = 5834.1 },
+            Zone = 119,
+            _index = 4,
+        },
+        {
+            PickUp = { 12522, 12523 }, -- Nesingwary quests
+            Coord = { x = 5489.7, y = 5823.5 },
+            Zone = 119,
+            _index = 5,
+        },
+        {
+            Qpart = { [12522] = { 1 } }, -- Hunt wildlife
+            Coord = { x = 5634.8, y = 5945.2 },
+            Range = 80,
+            Zone = 119,
+            _index = 6,
+        },
+        {
+            Done = { 12522 },
+            Coord = { x = 5489.7, y = 5823.5 },
+            Zone = 119,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== STORM PEAKS ====================
+    -- High-level zone (76-78)
+    -- K3 / Dun Niffelem / Sons of Hodir
+
+    APR.RouteQuestStepList["76-StormPeaks-Alliance"] = {
+        {
+            PickUp = { 12842 }, -- Storm Peaks breadcrumb
+            Coord = { x = 3682.4, y = -723.5 },
+            Zone = 115, -- From Dragonblight
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 115, to = 120 }, -- Fly to Storm Peaks
+            Coord = { x = 3682.4, y = -723.5 },
+            Zone = 115,
+            _index = 2,
+        },
+        {
+            Done = { 12842 },
+            Coord = { x = 6123.4, y = -1234.8 },
+            Zone = 120, -- Storm Peaks
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 29950 }, -- K3 flight master
+            Coord = { x = 6145.7, y = -1256.3 },
+            Zone = 120,
+            _index = 4,
+        },
+        {
+            PickUp = { 12843, 12844 }, -- K3 quests
+            Coord = { x = 6134.2, y = -1245.9 },
+            Zone = 120,
+            _index = 5,
+        },
+        {
+            Qpart = { [12843] = { 1 } }, -- Slay Iron Dwarves
+            Coord = { x = 6256.8, y = -1178.4 },
+            Range = 80,
+            Zone = 120,
+            _index = 6,
+        },
+        {
+            Done = { 12843 },
+            Coord = { x = 6134.2, y = -1245.9 },
+            Zone = 120,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== ICECROWN ====================
+    -- Max-level zone (77-80)
+    -- Argent Tournament / Shadow Vault / Icecrown Citadel
+
+    APR.RouteQuestStepList["77-Icecrown-Alliance"] = {
+        {
+            PickUp = { 13157 }, -- Icecrown breadcrumb
+            Coord = { x = 6145.7, y = -1256.3 },
+            Zone = 120, -- From Storm Peaks
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 120, to = 118 }, -- Fly to Icecrown
+            Coord = { x = 6145.7, y = -1256.3 },
+            Zone = 120,
+            _index = 2,
+        },
+        {
+            Done = { 13157 },
+            Coord = { x = 8634.5, y = 1023.6 },
+            Zone = 118, -- Icecrown
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 30314 }, -- Argent Tournament Grounds flight master
+            Coord = { x = 8645.2, y = 1056.8 },
+            Zone = 118,
+            _index = 4,
+        },
+        {
+            PickUp = { 13158, 13159 }, -- Argent Tournament intro
+            Coord = { x = 8623.7, y = 1034.9 },
+            Zone = 118,
+            _index = 5,
+        },
+        {
+            Qpart = { [13158] = { 1 } }, -- Slay Scourge
+            Coord = { x = 8756.4, y = 1189.3 },
+            Range = 80,
+            Zone = 118,
+            _index = 6,
+        },
+        {
+            Done = { 13158 },
+            Coord = { x = 8623.7, y = 1034.9 },
+            Zone = 118,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
 end

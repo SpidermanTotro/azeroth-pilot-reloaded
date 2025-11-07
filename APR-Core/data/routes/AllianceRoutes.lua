@@ -44,6 +44,11 @@ if (APR.Faction == "Alliance") then
         ["68-BoreanTundra-Alliance"] = L["WotLK - Borean Tundra"],
         ["68-HowlingFjord-Alliance"] = L["WotLK - Howling Fjord"],
         ["71-Dragonblight-Alliance"] = L["WotLK - Dragonblight"],
+        ["73-GrizzlyHills-Alliance"] = L["WotLK - Grizzly Hills"],
+        ["74-ZulDrak-Alliance"] = L["WotLK - Zul'Drak"],
+        ["76-SholazarBasin-Alliance"] = L["WotLK - Sholazar Basin"],
+        ["76-StormPeaks-Alliance"] = L["WotLK - Storm Peaks"],
+        ["77-Icecrown-Alliance"] = L["WotLK - Icecrown"],
     }
     APR.RouteList.Cataclysm = {}
     APR.RouteList.MistsOfPandaria = {
