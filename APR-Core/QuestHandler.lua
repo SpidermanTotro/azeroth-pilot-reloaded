@@ -1,13 +1,78 @@
 local _G = _G
 local L = LibStub("AceLocale-3.0"):GetLocale("APR")
 
+-- ═══════════════════════════════════════════════════════════════════════
+-- QUEST COMPLETION CACHE SYSTEM
+-- Reduces repeated API calls for quest completion checks
+-- ═══════════════════════════════════════════════════════════════════════
+
+APR.QuestCache = APR.QuestCache or {
+    completion = {},  -- Quest completion status cache
+    titles = {},      -- Quest title cache
+    lastUpdate = 0,   -- Last cache update timestamp
+    updateInterval = 1.0  -- Cache update interval (seconds)
+}
+
+--- Check if quest is completed (with caching)
+--- @param questID number The quest ID to check
+--- @return boolean True if quest is completed
+local function IsQuestCompleted(questID)
+    if not questID then return false end
+
+    -- Check cache first
+    local cached = APR.QuestCache.completion[questID]
+    if cached ~= nil then
+        return cached
+    end
+
+    -- Query API and cache result
+    local isComplete = IsQuestCompleted(questID)
+    APR.QuestCache.completion[questID] = isComplete
+    return isComplete
+end
+
+--- Clear quest completion cache (called on quest events)
+local function ClearQuestCache()
+    APR.QuestCache.completion = {}
+    APR.QuestCache.lastUpdate = GetTime()
+end
+
+--- Public function to clear quest cache (called from events)
+function APR:ClearQuestCache()
+    ClearQuestCache()
+end
+
+--- Get quest title (with caching)
+--- @param questID number The quest ID
+--- @return string|nil Quest title or nil
+local function GetQuestTitle(questID)
+    if not questID then return nil end
+
+    -- Check cache first
+    local cached = APR.QuestCache.titles[questID]
+    if cached then
+        return cached
+    end
+
+    -- Query API and cache result
+    local title = C_QuestLog.GetTitleForQuestID(questID)
+    if title then
+        APR.QuestCache.titles[questID] = title
+    end
+    return title
+end
+
+-- ═══════════════════════════════════════════════════════════════════════
+-- QUEST HANDLER FUNCTIONS
+-- ═══════════════════════════════════════════════════════════════════════
+
 local function GroupQuestPopup()
     local step = APR:GetStep(APRData[APR.PlayerID][APR.ActiveRoute])
 
     if not step then return end
 
     local questId = step.Group.QuestId
-    if not C_QuestLog.IsQuestFlaggedCompleted(questId) and not step.QuestLineSkip then
+    if not IsQuestCompleted(questId) and not step.QuestLineSkip then
         local sugestGroupNumber = step.Group.Number
         local dialogText = L["OPTIONAL"] .. " - " .. L["SUGGESTED_PLAYERS"] .. ": " .. sugestGroupNumber
 
@@ -204,11 +269,11 @@ function APR:UpdateStep()
         end
 
         -- REWORK LOA (BfA Loa pick)
-        if step.PickedLoa and step.PickedLoa == 2 and (APR.ActiveQuests[47440] or C_QuestLog.IsQuestFlaggedCompleted(47440)) then
+        if step.PickedLoa and step.PickedLoa == 2 and (APR.ActiveQuests[47440] or IsQuestCompleted(47440)) then
             APR:UpdateNextStep()
             APR:Debug("PickedLoa Skip 2 step:" .. CurStep)
             return
-        elseif step.PickedLoa and step.PickedLoa == 1 and (APR.ActiveQuests[47439] or C_QuestLog.IsQuestFlaggedCompleted(47439)) then
+        elseif step.PickedLoa and step.PickedLoa == 1 and (APR.ActiveQuests[47439] or IsQuestCompleted(47439)) then
             APR:UpdateNextStep()
             APR:Debug("PickedLoa Skip 1 step:" .. CurStep)
             return
@@ -291,7 +356,7 @@ function APR:UpdateStep()
             local flagged = 0
 
             for _, item in ipairs(step.BuyMerchant) do
-                if (C_QuestLog.IsQuestFlaggedCompleted(item.questID)) then
+                if (IsQuestCompleted(item.questID)) then
                     flagged = flagged + 1
                 end
                 local itemInfo = APR:GetItemInfo(item.itemID)
@@ -381,7 +446,7 @@ function APR:UpdateStep()
                 for index = 1, getn(step.QpartDB) do
                     local qPartDBQuestId = step.QpartDB[index]
                     APR:Debug("QpartDB index: " .. index .. ", questID: " .. tostring(qPartDBQuestId))
-                    if (C_QuestLog.IsQuestFlaggedCompleted(qPartDBQuestId) or APR.ActiveQuests[qPartDBQuestId]) then
+                    if (IsQuestCompleted(qPartDBQuestId) or APR.ActiveQuests[qPartDBQuestId]) then
                         wantedQuestId = qPartDBQuestId
                         APR:Debug("QpartDB wantedQuestId set: " .. tostring(wantedQuestId))
                         break
@@ -404,7 +469,7 @@ function APR:UpdateStep()
                     total = total + 1
                     APR:Debug("Qpart objectiveIndex: " .. tostring(objectiveIndex))
 
-                    if C_QuestLog.IsQuestFlaggedCompleted(questID)
+                    if IsQuestCompleted(questID)
                         or ((UnitLevel("player") == APR.MaxLevel) and APR:Contains(APR.BonusObj, questID))
                         or APRData[APR.PlayerID].BonusSkips[questID]
                     then
@@ -475,7 +540,7 @@ function APR:UpdateStep()
                     if questName then
                         myQuestID = questID
                     end
-                    if C_QuestLog.IsQuestFlaggedCompleted(questID) or questData then
+                    if IsQuestCompleted(questID) or questData then
                         hasQuestCompleted = true
                         break
                     end
@@ -491,10 +556,10 @@ function APR:UpdateStep()
                 local uncompletedIDs = {}
                 for _, questID in ipairs(questIDs) do
                     local questData = APR.ActiveQuests[questID]
-                    if not (questData or C_QuestLog.IsQuestFlaggedCompleted(questID)) then
+                    if not (questData or IsQuestCompleted(questID)) then
                         tinsert(uncompletedIDs, questID)
                     end
-                    if C_QuestLog.IsQuestFlaggedCompleted(questID) or questData then
+                    if IsQuestCompleted(questID) or questData then
                         completedCount = completedCount + 1
                     end
                 end
@@ -515,14 +580,14 @@ function APR:UpdateStep()
                 if step.WaypointDB then
                     local questIDs = step.WaypointDB
                     for _, questID in ipairs(questIDs) do
-                        if (C_QuestLog.IsQuestFlaggedCompleted(questID)) then
+                        if (IsQuestCompleted(questID)) then
                             APR:NextQuestStep()
                             return
                         end
                     end
                 end
                 local questID = step.Waypoint
-                if (C_QuestLog.IsQuestFlaggedCompleted(questID)) then
+                if (IsQuestCompleted(questID)) then
                     APR:Debug("APR.UpdateStep:Waypoint:Plus:" .. APRData[APR.PlayerID][APR.ActiveRoute])
 
                     APR:NextQuestStep()
@@ -533,7 +598,7 @@ function APR:UpdateStep()
             end
         elseif (step.Treasure) then
             local questID = step.Treasure
-            if (C_QuestLog.IsQuestFlaggedCompleted(questID)) then
+            if (IsQuestCompleted(questID)) then
                 APR:Debug("APR.UpdateStep:Treasure:Plus:" .. APRData[APR.PlayerID][APR.ActiveRoute])
 
                 APR:NextQuestStep()
@@ -544,7 +609,7 @@ function APR:UpdateStep()
         elseif (step.DropQuest) then
             local questID = step.DropQuest
             local questData = APR.ActiveQuests[questID]
-            if C_QuestLog.IsQuestFlaggedCompleted(questID) or questData then
+            if IsQuestCompleted(questID) or questData then
                 APR:Debug("APR.UpdateStep:DropQuest:Plus:" .. APRData[APR.PlayerID][APR.ActiveRoute])
                 APR:NextQuestStep()
                 return
@@ -565,12 +630,12 @@ function APR:UpdateStep()
                     local questName = C_QuestLog.GetTitleForQuestID(questID)
                     if questName then
                         myQuestID = questID
-                    elseif not questData and not C_QuestLog.IsQuestFlaggedCompleted(questID) then
+                    elseif not questData and not IsQuestCompleted(questID) then
                         if APR.IsInRouteZone then
                             APR:HandleMissingQuest(questID)
                         end
                     end
-                    if C_QuestLog.IsQuestFlaggedCompleted(questID) or questData then
+                    if IsQuestCompleted(questID) or questData then
                         hasQuestCompleted = true
                         break
                     end
@@ -590,12 +655,12 @@ function APR:UpdateStep()
                     if questData then
                         tinsert(uncompletedIDs, questID)
                         questToHighlight = questToHighlight or questID
-                    elseif not C_QuestLog.IsQuestFlaggedCompleted(questID) then
+                    elseif not IsQuestCompleted(questID) then
                         if APR.IsInRouteZone then
                             APR:HandleMissingQuest(questID)
                         end
                     end
-                    if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+                    if IsQuestCompleted(questID) then
                         completedCount = completedCount + 1
                     end
                 end
@@ -611,7 +676,7 @@ function APR:UpdateStep()
                 APR:TrackQuest(questToHighlight)
             end
         elseif (step.WarMode) then
-            if C_QuestLog.IsQuestFlaggedCompleted(step.WarMode) or C_PvP.IsWarModeActive() then
+            if IsQuestCompleted(step.WarMode) or C_PvP.IsWarModeActive() then
                 APR:Debug("APR.UpdateStep:WarMode:" .. APRData[APR.PlayerID][APR.ActiveRoute])
 
                 APR:UpdateNextStep()
@@ -634,7 +699,7 @@ function APR:UpdateStep()
                 APR.currentStep:AddStepButton(questID .. "-UseItem", itemID, 'item')
             end
 
-            if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            if IsQuestCompleted(questID) then
                 APR:UpdateNextStep()
                 return
             end
@@ -648,7 +713,7 @@ function APR:UpdateStep()
                 APR.currentStep:AddStepButton(questID .. "-UseSpell", spellID, 'spell')
             end
 
-            if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            if IsQuestCompleted(questID) then
                 APR:UpdateNextStep()
                 return
             end
@@ -676,7 +741,7 @@ function APR:UpdateStep()
                 APR.currentStep:AddStepButton(questKey .. "-" .. useHSKey, spellID, 'spell')
             end
 
-            if C_QuestLog.IsQuestFlaggedCompleted(questKey) then
+            if IsQuestCompleted(questKey) then
                 APR:UpdateNextStep()
                 return
             end
@@ -684,7 +749,7 @@ function APR:UpdateStep()
             if APR.IsInRouteZone then
                 APR.currentStep:AddQuestSteps(step.SetHS, L["SET_HEARTHSTONE"], "SetHS")
             end
-            if (C_QuestLog.IsQuestFlaggedCompleted(step.SetHS)) then
+            if (IsQuestCompleted(step.SetHS)) then
                 APR:UpdateNextStep()
                 return
             end
@@ -702,12 +767,12 @@ function APR:UpdateStep()
                     ": " .. (APR:GetTaxiNodeName(step))
                 APR.currentStep:AddQuestSteps(step.UseFlightPath, questText, "UseFlightPath")
             end
-            if C_QuestLog.IsQuestFlaggedCompleted(step.UseFlightPath) then
+            if IsQuestCompleted(step.UseFlightPath) then
                 APR:UpdateNextStep()
                 return
             end
         elseif (step.Group) then
-            if (C_QuestLog.IsQuestFlaggedCompleted(step.Group.QuestId)) then
+            if (IsQuestCompleted(step.Group.QuestId)) then
                 APR:UpdateNextStep()
                 return
             else
@@ -727,7 +792,7 @@ function APR:UpdateStep()
                         questText = questData.objectives[objectiveIndex].text
                         questStatus = questData.objectives[objectiveIndex].status
                     end
-                    if questStatus == APR.QUEST_STATUS.COMPLETE or C_QuestLog.IsQuestFlaggedCompleted(questID) then
+                    if questStatus == APR.QUEST_STATUS.COMPLETE or IsQuestCompleted(questID) then
                         APR:UpdateNextStep()
                         return
                     end
@@ -791,7 +856,7 @@ function APR:UpdateStep()
             local questData = step.DroppableQuest
             local Qid = questData.Qid
 
-            if not C_QuestLog.IsQuestFlaggedCompleted(Qid) and not APR.ActiveQuests[Qid] then
+            if not IsQuestCompleted(Qid) and not APR.ActiveQuests[Qid] then
                 if APR.IsInRouteZone then
                     local MobId = questData.MobId
                     local MobName = APRData.NPCList[MobId] or questData.Text
@@ -809,7 +874,7 @@ function APR:UpdateStep()
                 local questData = APR.ActiveQuests[questId]
                 for _, objectiveId in pairs(objectives) do
                     objectiveId = tonumber(objectiveId)
-                    if C_QuestLog.IsQuestFlaggedCompleted(questId) == false and not APRData[APR.PlayerID].BonusSkips[questId] then
+                    if IsQuestCompleted(questId) == false and not APRData[APR.PlayerID].BonusSkips[questId] then
                         local objective
                         if questData and questData.objectives and questData.objectives[objectiveId]
                             and questData.objectives[objectiveId].status ~= APR.QUEST_STATUS.COMPLETE
@@ -997,7 +1062,7 @@ function APR:RemoveQuest(questID)
     if StepP == "Done" then
         local nrLeft = 0
         for _, id in pairs(questIDs) do
-            if not C_QuestLog.IsQuestFlaggedCompleted(id) and questID ~= id then
+            if not IsQuestCompleted(id) and questID ~= id then
                 nrLeft = nrLeft + 1
             end
         end

@@ -146,6 +146,9 @@ end)
 ---------------------------------------------------------------------------------------
 
 function APR.event.functions.accept(event, ...)
+    -- Clear quest cache on quest acceptance
+    APR:ClearQuestCache()
+
     if event == "QUEST_ACCEPTED" then
         local questID = ...;
         if APR.settings.profile.firstAutoShareQuestWithFriend and IsInGroup() then
@@ -772,6 +775,9 @@ function APR.event.functions.raidIcon(event, ...)
 end
 
 function APR.event.functions.remove(event, questID, wasReplayQuest)
+    -- Clear quest cache on quest removal
+    APR:ClearQuestCache()
+
     APR:Debug(L["Q_REMOVED"], questID)
     APR:RemoveQuest(questID)
     if (APR.ActiveRoute == questID) then
@@ -865,6 +871,9 @@ function APR.event.functions.treasure(event, ...)
 end
 
 function APR.event.functions.updateQuest(event, ...)
+    -- Clear quest completion cache when quest log updates
+    APR:ClearQuestCache()
+
     if event == "QUEST_LOG_UPDATE" then
         APR.event:DebouncedUpdateQuest(0.2)
     elseif event == "UNIT_QUEST_LOG_CHANGED" then
