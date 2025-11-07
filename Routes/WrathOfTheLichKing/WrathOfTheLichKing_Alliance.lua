@@ -1011,7 +1011,7 @@ if APR.Faction == "Alliance" then
             _index = 16,
         },
         {
-            PickUp = { 11692, 11708 }, -- Farshire quests
+            PickUp = { 11692, 11693 }, -- Farshire quests
             Coord = { x = 1758.6, y = 5188.4 },
             Zone = 114,
             _index = 17,
