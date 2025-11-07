@@ -76,5 +76,9 @@ APR-Core/StatusReport.lua
 APR-Core/GatheringTracker.lua
 APR-Core/AdvancedFeatures.lua
 APR-Core/GearAdvisor.lua
+APR-Core/TalentAdvisor.lua
+APR-Core/QuestItemAutoUse.lua
+APR-Core/DeathRecovery.lua
+APR-Core/ConsumableAdvisor.lua
 
 Routes/RouteList.xml
