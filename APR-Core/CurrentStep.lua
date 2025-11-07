@@ -726,10 +726,10 @@ function APR.currentStep:AddStepButton(questsListKey, itemID, attribute)
     end
     local function getIconData()
         if attribute == "item" then
-            local _, _, _, _, _, _, _, _, _, itemTexture = C_Item.GetItemInfo(itemID)
-            return itemTexture
+            local itemInfo = APR:GetItemInfo(itemID)
+            return itemInfo and itemInfo.iconID or nil
         else
-            local spellInfo = C_Spell.GetSpellInfo(itemID)
+            local spellInfo = APR:GetSpellInfo(itemID)
             return spellInfo and spellInfo.iconID or nil
         end
     end

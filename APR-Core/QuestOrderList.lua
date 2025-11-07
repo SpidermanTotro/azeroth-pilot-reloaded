@@ -333,7 +333,8 @@ function APR.questOrderList:AddStepFromRoute(forceRendering)
                     if C_QuestLog.IsQuestFlaggedCompleted(item.questID) or CurStep > stepIndex then
                         flagged = flagged + 1
                     else
-                        local itemName = C_Item.GetItemInfo(item.itemID) or UNKNOWN
+                        local itemInfo = APR:GetItemInfo(item.itemID)
+                        local itemName = itemInfo and itemInfo.name or UNKNOWN
                         table.insert(questInfo, { questID = item.quantity, questName = itemName })
                     end
                 end
@@ -593,15 +594,16 @@ function APR.questOrderList:AddStepFromRoute(forceRendering)
             elseif step.UseItem then
                 local questID = step.UseItem.questID
                 local itemID = step.UseItem.itemID
-                local itemName = C_Item.GetItemInfo(itemID)
+                local itemInfo = APR:GetItemInfo(itemID)
+                local itemName = itemInfo and itemInfo.name or nil
                 local questText = L["USE_ITEM"] .. ": " .. (itemName or UNKNOWN)
                 local color = (C_QuestLog.IsQuestFlaggedCompleted(questID) or CurStep > stepIndex) and "green" or "gray"
                 AddStepFrame(stepIndex, questText, color)
             elseif step.UseSpell then
                 local questID = step.UseSpell.questID
                 local spellID = step.UseSpell.spellID
-                local spellInfo = C_Spell.GetSpellInfo(spellID)
-                local questText = L["USE_SPELL"] .. ": " .. (spellInfo.name or UNKNOWN)
+                local spellInfo = APR:GetSpellInfo(spellID)
+                local questText = L["USE_SPELL"] .. ": " .. (spellInfo and spellInfo.name or UNKNOWN)
                 local color = (C_QuestLog.IsQuestFlaggedCompleted(questID) or CurStep > stepIndex) and "green" or "gray"
                 AddStepFrame(stepIndex, questText, color)
             elseif step.GetFP then
@@ -616,13 +618,15 @@ function APR.questOrderList:AddStepFromRoute(forceRendering)
                 AddStepFrameWithQuest(stepIndex, questText, questInfo, color)
             elseif step.LearnProfession then
                 local spellID = step.LearnProfession
-                local name = C_Spell.GetSpellInfo(spellID).name
+                local spellInfo = APR:GetSpellInfo(spellID)
+                local name = spellInfo and spellInfo.name or UNKNOWN
                 local questInfo = { { questID = name } }
                 local color = APR:IsSpellKnown(spellID) and "green" or "gray"
                 AddStepFrameWithQuest(stepIndex, L["LEARN_PROFESSION"], questInfo, color)
             elseif step.LootItem then
                 local itemID = step.LootItem
-                local itemName, _, _, _, _, _, _, _, _, _ = C_Item.GetItemInfo(itemID)
+                local itemInfo = APR:GetItemInfo(itemID)
+                local itemName = itemInfo and itemInfo.name or UNKNOWN
                 local name = itemName or UNKNOWN
                 local color = tContains(APRItemLooted[APR.PlayerID], itemID) and "green" or "gray"
                 AddStepFrame(stepIndex, format(L["LOOT_ITEM"], name), color)

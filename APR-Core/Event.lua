@@ -302,7 +302,11 @@ function APR.event.functions.done(event, ...)
             for playerSlot = 0, 18 do
                 local itemLink = GetInventoryItemLink("player", playerSlot)
                 if itemLink then
-                    local _, _, itemQuality, itemLevel, _, _, _, _, itemEquipLoc = C_Item.GetItemInfo(itemLink)
+                    local itemInfo = APR:GetItemInfo(itemLink)
+                    local itemQuality = itemInfo and itemInfo.quality or nil
+                    local itemLevel = itemInfo and itemInfo.level or nil
+                    local itemEquipLoc = itemInfo and itemInfo.equipLoc or nil
+
                     if itemQuality == HEIRLOOM_QUALITY then
                         itemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
                     end
@@ -319,7 +323,7 @@ function APR.event.functions.done(event, ...)
         local function isCosmeticKnown(itemLink)
             -- Check if the cosmetic appearance is already collected by the player
             if not itemLink then return false end
-            local itemID = C_Item.GetItemInfoInstant(itemLink)
+            local itemID, _, _, _, _, _, _ = APR:GetItemInfoInstant(itemLink)
             if itemID then
                 -- Modern method
                 local itemAppearanceID = C_TransmogCollection.GetItemInfo(itemID)
@@ -341,11 +345,14 @@ function APR.event.functions.done(event, ...)
             for i = 1, GetNumQuestChoices() do
                 local itemLink = GetQuestItemLink("choice", i)
                 if itemLink then
-                    local _, _, _, _, _, _, _, _, equipLoc, _, vendorPrice, classID, subClassID = C_Item.GetItemInfo(
-                        itemLink)
+                    local itemInfo = APR:GetItemInfo(itemLink)
+                    local equipLoc = itemInfo and itemInfo.equipLoc or nil
+                    local vendorPrice = itemInfo and itemInfo.sellPrice or 0
+                    local classID = itemInfo and itemInfo.classID or nil
+                    local subClassID = itemInfo and itemInfo.subClassID or nil
+
                     local itemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
                     equipLoc = normalizeEquipLoc(equipLoc)
-                    vendorPrice = vendorPrice or 0
 
                     local isCosmetic = (classID == COSMETIC_CLASSID and subClassID == COSMETIC_SUBCLASSID)
                     local isKnownCosmetic = isCosmeticKnown(itemLink)
@@ -655,7 +662,7 @@ function APR.event.functions.merchant(event, ...)
             local itemLink = string.match(message, "|Hitem:.-|h.-|h")
             local quantity = APR:GetQuantityfromLootMessage(message)
             if itemLink then
-                local itemID, _, _, _, _, _, _ = C_Item.GetItemInfoInstant(itemLink)
+                local itemID = APR:GetItemInfoInstant(itemLink)
                 APR:UpdatePurchaseTracking(itemID, quantity)
             end
         end
@@ -698,10 +705,12 @@ function APR.event.functions.merchant(event, ...)
                 for bagSlots = 1, C_Container.GetContainerNumSlots(myBags) do
                     local CurrentItemId = C_Container.GetContainerItemID(myBags, bagSlots)
                     if CurrentItemId then
-                        local _, _, itemQuality, _, _, _, _, _, _, _, sellPrice = C_Item.GetItemInfo(CurrentItemId)
-                        local itemInfo = C_Container.GetContainerItemInfo(myBags, bagSlots)
-                        if itemQuality == 0 and sellPrice > 0 and itemInfo.stackCount > 0 then
-                            totalPrices = totalPrices + (sellPrice * itemInfo.stackCount)
+                        local itemInfo = APR:GetItemInfo(CurrentItemId)
+                        local itemQuality = itemInfo and itemInfo.quality or 0
+                        local sellPrice = itemInfo and itemInfo.sellPrice or 0
+                        local containerInfo = C_Container.GetContainerItemInfo(myBags, bagSlots)
+                        if itemQuality == 0 and sellPrice > 0 and containerInfo and containerInfo.stackCount > 0 then
+                            totalPrices = totalPrices + (sellPrice * containerInfo.stackCount)
                             C_Container.UseContainerItem(myBags, bagSlots)
                         end
                     end

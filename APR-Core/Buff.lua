@@ -118,7 +118,8 @@ end
 
 function APR.Buff:AddBuffIcon(buff)
     local aura = C_UnitAuras.GetPlayerAuraBySpellID(buff.spellId)
-    local icon = aura and aura.icon or C_Spell.GetSpellInfo(buff.spellId).iconID
+    local spellInfo = APR:GetSpellInfo(buff.spellId)
+    local icon = aura and aura.icon or (spellInfo and spellInfo.iconID or nil)
     local isDisabled = not aura
     local auraInstanceID = aura and aura.auraInstanceID or nil
 

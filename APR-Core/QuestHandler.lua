@@ -294,8 +294,8 @@ function APR:UpdateStep()
                 if (C_QuestLog.IsQuestFlaggedCompleted(item.questID)) then
                     flagged = flagged + 1
                 end
-                local itemName, _, _, _, _, _, _, _, _, _ = C_Item.GetItemInfo(item.itemID)
-                local name = itemName or UNKNOWN
+                local itemInfo = APR:GetItemInfo(item.itemID)
+                local name = (itemInfo and itemInfo.name) or UNKNOWN
                 APR.currentStep:AddExtraLineText("BUY_ITEM_" .. name,
                     format(L["BUY_ITEM"], item.quantity, name))
             end
@@ -313,7 +313,8 @@ function APR:UpdateStep()
                 APR:NextQuestStep()
                 return
             end
-            local name = C_Spell.GetSpellInfo(spellID).name
+            local spellInfo = APR:GetSpellInfo(spellID)
+            local name = (spellInfo and spellInfo.name) or UNKNOWN
             APR.currentStep:AddExtraLineText("LEARN_PROFESSION", format(L["LEARN_PROFESSION_DETAILS"], name))
         end
 
@@ -326,8 +327,8 @@ function APR:UpdateStep()
                 APR:NextQuestStep()
                 return
             end
-            local itemName, _, _, _, _, _, _, _, _, _ = C_Item.GetItemInfo(itemID)
-            local name = itemName or UNKNOWN
+            local itemInfo = APR:GetItemInfo(itemID)
+            local name = (itemInfo and itemInfo.name) or UNKNOWN
             APR.currentStep:AddExtraLineText("LOOT_ITEM", format(L["LOOT_ITEM"], name))
         end
 
@@ -625,7 +626,8 @@ function APR:UpdateStep()
         elseif step.UseItem then
             local questID = step.UseItem.questID
             local itemID = step.UseItem.itemID
-            local itemName = C_Item.GetItemInfo(itemID)
+            local itemInfo = APR:GetItemInfo(itemID)
+            local itemName = itemInfo and itemInfo.name or nil
             local questText = L["USE_ITEM"] .. ": " .. (itemName or UNKNOWN)
             if APR.IsInRouteZone then
                 APR.currentStep:AddQuestSteps(questID, questText, "UseItem")
@@ -639,8 +641,8 @@ function APR:UpdateStep()
         elseif step.UseSpell then
             local questID = step.UseSpell.questID
             local spellID = step.UseSpell.spellID
-            local spellInfo = C_Spell.GetSpellInfo(spellID)
-            local questText = L["USE_SPELL"] .. ": " .. (spellInfo.name or UNKNOWN)
+            local spellInfo = APR:GetSpellInfo(spellID)
+            local questText = L["USE_SPELL"] .. ": " .. (spellInfo and spellInfo.name or UNKNOWN)
             if APR.IsInRouteZone then
                 APR.currentStep:AddQuestSteps(questID, questText, "UseSpell")
                 APR.currentStep:AddStepButton(questID .. "-UseSpell", spellID, 'spell')
