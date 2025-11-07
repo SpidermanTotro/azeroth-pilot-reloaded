@@ -9,6 +9,8 @@
     <Script file="Routes/Dragonflight/Dragonflight.lua"/>
     <Script file="Routes/Dragonflight/Dragonflight_Alliance.lua"/>
     <Script file="Routes/Dragonflight/Dragonflight_horde.lua"/>
+    <Script file="Routes/Dragonflight/ZaralekCavern.lua"/>
+    <Script file="Routes/Dragonflight/EmeraldDream.lua"/>
 
     <Script file="Routes/ExilesReach/ExilesReach_Horde.lua"/>
     <Script file="Routes/ExilesReach/ExilesReach_Alliance.lua"/>
