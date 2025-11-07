@@ -18,6 +18,9 @@
     <Script file="Routes/Legion/Legion_Alliance.lua"/>
     <Script file="Routes/Legion/Legion_Horde.lua"/>
     <Script file="Routes/Legion/Legion.lua"/>
+    <Script file="Routes/Legion/Suramar.lua"/>
+    <Script file="Routes/Legion/BrokenShore.lua"/>
+    <Script file="Routes/Legion/Argus.lua"/>
 
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua"/>
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua"/>
