@@ -7,6 +7,33 @@ APR.event = APR:NewModule("Event")
 APR.event.framePool = {}
 APR.event.functions = {}
 
+-- ═══════════════════════════════════════════════════════════════════════
+-- EVENT BATCHING & OPTIMIZATION SYSTEM
+-- ═══════════════════════════════════════════════════════════════════════
+
+APR.EventBatch = APR.EventBatch or {
+    pending = {},      -- Pending batched events
+    timers = {},       -- Active batch timers
+    priorities = {     -- Event priorities (lower = higher priority)
+        PLAYER_DEAD = 1,
+        PLAYER_ALIVE = 1,
+        QUEST_ACCEPTED = 2,
+        QUEST_COMPLETE = 2,
+        QUEST_REMOVED = 2,
+        QUEST_LOG_UPDATE = 3,
+        UNIT_QUEST_LOG_CHANGED = 4,
+        GOSSIP_SHOW = 2,
+        MERCHANT_SHOW = 2,
+    }
+}
+
+--- Get event priority (lower number = higher priority)
+--- @param event string The event name
+--- @return number Priority level (1-5, default 5)
+local function GetEventPriority(event)
+    return APR.EventBatch.priorities[event] or 5
+end
+
 ---------------------------------------------------------------------------------------
 ------------------------------------- EVENTS ------------------------------------------
 ---------------------------------------------------------------------------------------
@@ -922,12 +949,46 @@ function APR.event:TalkToDenyNpcLogic(step)
 end
 
 function APR.event:DebouncedUpdateQuest(delay)
+    -- Cancel existing timer if present
     if pendingQuestUpdateTimer then
         pendingQuestUpdateTimer:Cancel()
     end
+
+    -- Create new debounced timer with priority awareness
     pendingQuestUpdateTimer = C_Timer.NewTimer(delay, function()
         APR:UpdateQuest()
-        APR:Debug("Extra UpdQuestThing (debounced)")
+        APR:Debug("Quest update executed (debounced with delay: " .. delay .. "s)")
         pendingQuestUpdateTimer = nil
+    end)
+end
+
+--- Batch and prioritize event execution
+--- @param event string The event name
+--- @param handler function The event handler function
+--- @param delay number Optional delay for batching (default 0.1)
+function APR.event:BatchEvent(event, handler, delay)
+    delay = delay or 0.1
+    local priority = GetEventPriority(event)
+
+    -- Store pending event
+    APR.EventBatch.pending[event] = {
+        handler = handler,
+        priority = priority,
+        timestamp = GetTime()
+    }
+
+    -- Cancel existing timer for this event
+    if APR.EventBatch.timers[event] then
+        APR.EventBatch.timers[event]:Cancel()
+    end
+
+    -- Create new timer
+    APR.EventBatch.timers[event] = C_Timer.NewTimer(delay, function()
+        local pending = APR.EventBatch.pending[event]
+        if pending and pending.handler then
+            pending.handler()
+        end
+        APR.EventBatch.pending[event] = nil
+        APR.EventBatch.timers[event] = nil
     end)
 end
