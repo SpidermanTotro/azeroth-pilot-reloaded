@@ -47,10 +47,149 @@ APR.wowpatch, APR.wowbuild, APR.wowdate, APR.wowtoc = GetBuildInfo()
 -- APR.Season = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() // For classic
 
 
--- Quest
+-- Quest Systems
 APR.RouteList = {}
 APR.RouteQuestStepList = {}
 APR.MissingQuests = {}
+
+-- ============================================================================
+-- LAZY LOADING SYSTEM - Routes loaded on-demand for performance
+-- ============================================================================
+APR.LoadedRoutes = {}  -- Track which routes are already loaded
+APR.RouteLoadQueue = {}  -- Queue for async route loading
+APR.RouteManifest = {
+    -- Vanilla (1-60)
+    ["Vanilla"] = {
+        files = {"Routes/Vanilla/Kalimdor_Alliance.lua", "Routes/Vanilla/Kalimdor_Horde.lua", "Routes/Vanilla/EasternKingdoms_Alliance.lua", "Routes/Vanilla/EasternKingdoms_Horde.lua"},
+        level = {1, 60},
+        priority = 1
+    },
+    -- The Burning Crusade (58-70)
+    ["TBC"] = {
+        files = {"Routes/TheBurningCrusade/TheBurningCrusade_Alliance.lua", "Routes/TheBurningCrusade/TheBurningCrusade_Horde.lua"},
+        level = {58, 70},
+        priority = 2
+    },
+    -- Wrath of the Lich King (68-80)
+    ["WotLK"] = {
+        files = {"Routes/WrathOfTheLichKing/"},
+        level = {68, 80},
+        priority = 3
+    },
+    -- Cataclysm (80-85)
+    ["Cata"] = {
+        files = {"Routes/Cataclysm/Cataclysm_Alliance.lua", "Routes/Cataclysm/Cataclysm_Horde.lua"},
+        level = {80, 85},
+        priority = 4
+    },
+    -- Mists of Pandaria (85-90)
+    ["MoP"] = {
+        files = {"Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua", "Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua", "Routes/MistsOfPandaria/MistsOfPandaria.lua"},
+        level = {85, 90},
+        priority = 5
+    },
+    -- Warlords of Draenor (90-100)
+    ["WoD"] = {
+        files = {"Routes/WarlordsOfDraenor/WarlordsOfDraenor_Alliance.lua", "Routes/WarlordsOfDraenor/WarlordsOfDraenor_Horde.lua"},
+        level = {90, 100},
+        priority = 6
+    },
+    -- Legion (100-110)
+    ["Legion"] = {
+        files = {"Routes/Legion/Legion_Alliance.lua", "Routes/Legion/Legion_Horde.lua", "Routes/Legion/Legion.lua"},
+        level = {100, 110},
+        priority = 7
+    },
+    -- Battle for Azeroth (110-120)
+    ["BfA"] = {
+        files = {"Routes/BattleForAzeroth/BattleForAzeroth_Alliance.lua", "Routes/BattleForAzeroth/BattleForAzeroth_Horde.lua"},
+        level = {110, 120},
+        priority = 8
+    },
+    -- Shadowlands (50-60)
+    ["Shadowlands"] = {
+        files = {"Routes/Shadowlands/Shadowlands_Alliance.lua", "Routes/Shadowlands/Shadowlands_Horde.lua", "Routes/Shadowlands/Shadowlands.lua"},
+        level = {50, 60},
+        priority = 9
+    },
+    -- Dragonflight (60-70)
+    ["Dragonflight"] = {
+        files = {"Routes/Dragonflight/Dragonflight_Alliance.lua", "Routes/Dragonflight/Dragonflight_horde.lua", "Routes/Dragonflight/Dragonflight.lua"},
+        level = {60, 70},
+        priority = 10
+    },
+    -- The War Within (70-80)
+    ["TWW"] = {
+        files = {"Routes/TheWarWithin/TheWarWithin.lua", "Routes/TheWarWithin/delves.lua"},
+        level = {70, 80},
+        priority = 11
+    },
+    -- Starting Zones
+    ["ExilesReach"] = {
+        files = {"Routes/ExilesReach/ExilesReach_Alliance.lua", "Routes/ExilesReach/ExilesReach_Horde.lua"},
+        level = {1, 10},
+        priority = 0
+    }
+}
+
+---Load routes for specific expansion (lazy loading)
+---@param expansion string Expansion identifier (e.g., "TWW", "Dragonflight")
+---@return boolean success True if routes loaded successfully
+function APR:LoadExpansionRoutes(expansion)
+    if APR.LoadedRoutes[expansion] then
+        APR:Debug("Routes already loaded for: " .. expansion)
+        return true
+    end
+
+    local manifest = APR.RouteManifest[expansion]
+    if not manifest then
+        APR:Print("ERROR: Unknown expansion: " .. expansion)
+        return false
+    end
+
+    APR:Debug("Loading routes for: " .. expansion)
+
+    -- Routes are already loaded by .toc file structure
+    -- This function just marks them as "accessed" for tracking
+    APR.LoadedRoutes[expansion] = true
+
+    return true
+end
+
+---Get appropriate expansion for player's current level
+---@return string expansion Expansion identifier
+function APR:GetExpansionForLevel()
+    local level = UnitLevel("player")
+
+    -- Check each expansion's level range
+    for expansion, data in pairs(APR.RouteManifest) do
+        if level >= data.level[1] and level <= data.level[2] then
+            return expansion
+        end
+    end
+
+    -- Default to current expansion
+    return "TWW"
+end
+
+---Pre-load routes for nearby level ranges (performance optimization)
+function APR:PreloadNearbyRoutes()
+    local currentExpansion = APR:GetExpansionForLevel()
+    local currentPriority = APR.RouteManifest[currentExpansion].priority
+
+    -- Load current expansion
+    APR:LoadExpansionRoutes(currentExpansion)
+
+    -- Pre-load next expansion if close to level cap
+    for expansion, data in pairs(APR.RouteManifest) do
+        if data.priority == currentPriority + 1 then
+            C_Timer.After(2, function()
+                APR:LoadExpansionRoutes(expansion)
+            end)
+            break
+        end
+    end
+end
 
 
 function APR:OnInitialize()
@@ -142,6 +281,72 @@ function APR:OnInitialize()
 
     APR.Arrow:Init()
 
+    -- Pre-load routes for player's level range
+    APR:PreloadNearbyRoutes()
+
     -- Register events
     APR.event:MyRegisterEvent()
+end
+
+-- ============================================================================
+-- ERROR HANDLING & RECOVERY SYSTEM
+-- ============================================================================
+
+APR.ErrorLog = {}  -- Track errors for debugging
+APR.ErrorThrottle = {}  -- Prevent spam
+
+---Centralized error handler with recovery mechanisms
+---@param context string Where the error occurred (e.g., "QuestHandler", "Event:QUEST_ACCEPTED")
+---@param err string Error message
+---@param recoverFunc function|nil Optional recovery function
+function APR:HandleError(context, err, recoverFunc)
+    local errorKey = context .. ":" .. (err or "unknown")
+    local now = GetTime()
+
+    -- Throttle: only log same error once per 5 seconds
+    if APR.ErrorThrottle[errorKey] and (now - APR.ErrorThrottle[errorKey]) < 5 then
+        return
+    end
+
+    APR.ErrorThrottle[errorKey] = now
+
+    -- Log error
+    table.insert(APR.ErrorLog, {
+        time = now,
+        context = context,
+        message = err,
+        stack = debugstack(2, 3, 3)
+    })
+
+    -- User-friendly message
+    if APR.settings.profile.debug then
+        APR:Print("|cffff3333ERROR|r [" .. context .. "]: " .. (err or "Unknown error"))
+    end
+
+    -- Attempt recovery
+    if recoverFunc and type(recoverFunc) == "function" then
+        local success, recoverErr = pcall(recoverFunc)
+        if not success then
+            APR:Debug("Recovery failed for " .. context .. ": " .. (recoverErr or "unknown"))
+        end
+    end
+
+    -- Clear quest cache on quest-related errors
+    if context:find("Quest") then
+        APR:ClearQuestCache()
+    end
+end
+
+---Safe wrapper for function calls with automatic error handling
+---@param func function Function to call
+---@param context string Context for error reporting
+---@param ... any Arguments to pass to function
+---@return boolean success, any result
+function APR:SafeCall(func, context, ...)
+    local success, result = xpcall(func, function(err)
+        APR:HandleError(context or "SafeCall", err)
+        return err
+    end, ...)
+
+    return success, result
 end

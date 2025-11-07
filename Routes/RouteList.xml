@@ -30,6 +30,10 @@
 
     <Script file="Routes/TheWarWithin/TheWarWithin.lua"/>
     <Script file="Routes/TheWarWithin/delves.lua"/>
+    <Script file="Routes/TheWarWithin/IsleOfDorn.lua"/>
+    <Script file="Routes/TheWarWithin/RingingDeeps.lua"/>
+    <Script file="Routes/TheWarWithin/Hallowfall.lua"/>
+    <Script file="Routes/TheWarWithin/AzjKahet.lua"/>
 
     <Script file="Routes/Vanilla/EasternKingdoms_Horde.lua"/>
     <Script file="Routes/Vanilla/EasternKingdoms_Alliance.lua"/>
