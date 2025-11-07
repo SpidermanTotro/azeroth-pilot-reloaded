@@ -346,7 +346,7 @@ if (APR.Faction == "Alliance") then
     -- Lumbermill Wod route
     -- Special case for Warlords of Draenor route based on quest completion
     local gorgrondRoute
-    if C_QuestLog.IsQuestFlaggedCompleted(35049) then
+    if APR:IsQuestFlaggedCompleted(35049) then
         gorgrondRoute = {
             expansion = "WarlordsOfDraenor",
             key = "543-DesMephisto-Gorgrond-Lumbermill",

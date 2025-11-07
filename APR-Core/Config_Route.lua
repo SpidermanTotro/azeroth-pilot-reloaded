@@ -700,7 +700,7 @@ end
 function APR.routeconfig:GetStartingZonePrefab()
     if APR:Contains({ 1409, 1726, 1727, 1728 }, APR:GetPlayerParentMapID()) then
         tinsert(APRCustomPath[APR.PlayerID], L["01-10 Exile's Reach"])
-    elseif not (C_QuestLog.IsQuestFlaggedCompleted(59926) or C_QuestLog.IsQuestFlaggedCompleted(56775)) and (APR.Level < APR.MinBoostLvl or APR.Level < 10) then -- first quest from Exile's Reach + boost
+    elseif not (APR:IsQuestFlaggedCompleted(59926) or APR:IsQuestFlaggedCompleted(56775)) and (APR.Level < APR.MinBoostLvl or APR.Level < 10) then -- first quest from Exile's Reach + boost
         --None skipable starting zone
         if APR.ClassId == APR.Classes["Death Knight"] and APR.RaceID >= 23 then                                                                                  -- Allied DK
             tinsert(APRCustomPath[APR.PlayerID], L["Allied Death Knight Start"])

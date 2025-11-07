@@ -102,7 +102,7 @@ function APR:IsOneOfQuestsCompleted(questIds)
         return false
     end
     for i = 1, #questIds do
-        if C_QuestLog.IsQuestFlaggedCompleted(questIds[i]) then
+        if APR:IsQuestFlaggedCompleted(questIds[i]) then
             return true
         end
     end
@@ -115,7 +115,7 @@ function APR:IsQuestsCompleted(questIds)
         return false
     end
     for i = 1, #questIds do
-        if not C_QuestLog.IsQuestFlaggedCompleted(questIds[i]) then
+        if not APR:IsQuestFlaggedCompleted(questIds[i]) then
             return false
         end
     end
@@ -313,12 +313,12 @@ end
 
 function APR:OverrideRouteData()
     if APR.ActiveRoute and string.match(APR.ActiveRoute, "DesMephisto%-Gorgrond") then
-        if C_QuestLog.IsQuestFlaggedCompleted(35049) then
+        if APR:IsQuestFlaggedCompleted(35049) then
             APR.RouteQuestStepList["543-DesMephisto-Gorgrond"] = nil
             APR.RouteQuestStepList["543-DesMephisto-Gorgrond"] = APR.RouteQuestStepList
                 ["543-DesMephisto-Gorgrond-Lumbermill"]
         end
-        if C_QuestLog.IsQuestFlaggedCompleted(34992) then
+        if APR:IsQuestFlaggedCompleted(34992) then
             APR.RouteQuestStepList["543-DesMephisto-Gorgrond-p1"] = nil
             APR.RouteQuestStepList["543-DesMephisto-Gorgrond-p1"] = APR.RouteQuestStepList
                 ["543-DesMephisto-Gorgrond-Lumbermill"]
