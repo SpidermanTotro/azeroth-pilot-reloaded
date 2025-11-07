@@ -2,6 +2,7 @@
 
     <Script file="Routes/BattleForAzeroth/BattleForAzeroth_Horde.lua"/>
     <Script file="Routes/BattleForAzeroth/BattleForAzeroth_Alliance.lua"/>
+    <Script file="Routes/BattleForAzeroth/Nazjatar_Mechagon.lua"/>
 
     <Script file="Routes/Cataclysm/Cataclysm_Alliance.lua"/>
     <Script file="Routes/Cataclysm/Cataclysm_Horde.lua"/>
@@ -29,6 +30,7 @@
     <Script file="Routes/Shadowlands/Shadowlands_Alliance.lua"/>
     <Script file="Routes/Shadowlands/Shadowlands_Horde.lua"/>
     <Script file="Routes/Shadowlands/Shadowlands.lua"/>
+    <Script file="Routes/Shadowlands/Korthia_ZerethMortis.lua"/>
 
     <Script file="Routes/TheBurningCrusade/TheBurningCrusade_Alliance.lua"/>
     <Script file="Routes/TheBurningCrusade/TheBurningCrusade_Horde.lua"/>
