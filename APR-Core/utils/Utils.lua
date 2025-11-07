@@ -1,36 +1,271 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("APR")
 
+-- ╔═══════════════════════════════════════════════════════════════════════╗
+-- ║                    WoW API Compatibility Layer                        ║
+-- ║  Centralized wrappers for WoW APIs with fallbacks for all versions   ║
+-- ╚═══════════════════════════════════════════════════════════════════════╝
+
+-- ═══════════════════════════════════════════════════════════════════════
+-- SPELL BOOK API (C_SpellBook)
+-- ═══════════════════════════════════════════════════════════════════════
+
 --- Check if a spell is known by the player (supports both classic and retail APIs).
+--- @param spellID number The spell ID to check
+--- @return boolean True if the spell is known
 function APR:IsSpellKnown(spellID)
+    if not spellID or type(spellID) ~= "number" then
+        return false
+    end
+
+    -- Modern API (WoW 10.0+)
     if C_SpellBook and C_SpellBook.IsSpellKnown then
         return C_SpellBook.IsSpellKnown(spellID)
     end
-    -- Fallback for older APIs (will show deprecated warning but necessary for compatibility)
+
+    ---@diagnostic disable-next-line: deprecated
+    -- Legacy fallback (Classic/older versions) - deprecated but necessary for compatibility
+    if IsSpellKnown then
+        ---@diagnostic disable-next-line: deprecated
+        return IsSpellKnown(spellID)
+    end
+
     return false
+end--- Get spell information (name, icon, etc.)
+--- @param spellID number The spell ID
+--- @return table|nil Spell information table or nil
+function APR:GetSpellInfo(spellID)
+    if not spellID or type(spellID) ~= "number" then
+        return nil
+    end
+
+    -- Modern API (WoW 10.0+)
+    if C_Spell and C_Spell.GetSpellInfo then
+        return C_Spell.GetSpellInfo(spellID)
+    end
+
+    -- Legacy API fallback
+    if GetSpellInfo then
+        local name, _, icon, castTime, minRange, maxRange, spellID = GetSpellInfo(spellID)
+        if name then
+            return {
+                name = name,
+                iconID = icon,
+                castTime = castTime,
+                minRange = minRange,
+                maxRange = maxRange,
+                spellID = spellID
+            }
+        end
+    end
+
+    return nil
 end
+
+--- Get spell name safely
+--- @param spellID number The spell ID
+--- @return string The spell name or "Spell [ID]" if not found
+function APR:GetSpellName(spellID)
+    if not spellID or type(spellID) ~= "number" then
+        return "Unknown Spell"
+    end
+
+    local spellInfo = APR:GetSpellInfo(spellID)
+    return (spellInfo and spellInfo.name) or ("Spell " .. tostring(spellID))
+end
+
+-- ═══════════════════════════════════════════════════════════════════════
+-- ITEM API (C_Item)
+-- ═══════════════════════════════════════════════════════════════════════
 
 --- Check if the player owns at least one copy of an item (bags/bank).
-function APR:PlayerHasItem(itemID)
-    if C_Item and C_Item.GetItemCount then
-        local count = C_Item.GetItemCount(itemID, true)
-        return (count and count > 0) and true or false
+--- @param itemID number|string The item ID or item link
+--- @param includeBank boolean Whether to include bank items (default: true)
+--- @return boolean True if player has the item
+function APR:PlayerHasItem(itemID, includeBank)
+    if not itemID then
+        return false
     end
+
+    includeBank = includeBank ~= false -- Default to true
+
+    -- Modern API (WoW 10.0+)
+    if C_Item and C_Item.GetItemCount then
+        local count = C_Item.GetItemCount(itemID, includeBank)
+        return count and count > 0
+    end
+
+    ---@diagnostic disable-next-line: deprecated
+    -- Legacy fallback - deprecated but necessary for compatibility
+    if GetItemCount then
+        ---@diagnostic disable-next-line: deprecated
+        local count = GetItemCount(itemID, includeBank)
+        return count and count > 0
+    end
+
+    return false
+end--- Get item information
+--- @param itemID number|string The item ID or item link
+--- @return table|nil Item information table or nil
+function APR:GetItemInfo(itemID)
+    if not itemID then
+        return nil
+    end
+
+    -- Modern API (WoW 10.0+)
+    if C_Item and C_Item.GetItemInfo then
+        local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType,
+              itemSubType, itemStackCount, itemEquipLoc, iconFileDataID,
+              sellPrice, classID, subClassID, bindType, expacID,
+              setID, isCraftingReagent = C_Item.GetItemInfo(itemID)
+
+        if itemName then
+            return {
+                name = itemName,
+                link = itemLink,
+                quality = itemQuality,
+                level = itemLevel,
+                minLevel = itemMinLevel,
+                type = itemType,
+                subType = itemSubType,
+                stackCount = itemStackCount,
+                equipLoc = itemEquipLoc,
+                iconID = iconFileDataID,
+                sellPrice = sellPrice,
+                classID = classID,
+                subClassID = subClassID,
+                bindType = bindType,
+                expacID = expacID,
+                setID = setID,
+                isCraftingReagent = isCraftingReagent
+            }
+        end
+    end
+
+    ---@diagnostic disable-next-line: deprecated
+    -- Legacy API fallback - deprecated but necessary for compatibility
+    if GetItemInfo then
+        ---@diagnostic disable-next-line: deprecated
+        local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType,
+              itemSubType, itemStackCount, itemEquipLoc, iconFileDataID,
+              sellPrice, classID, subClassID = GetItemInfo(itemID)
+
+        if itemName then
+            return {
+                name = itemName,
+                link = itemLink,
+                quality = itemQuality,
+                level = itemLevel,
+                minLevel = itemMinLevel,
+                type = itemType,
+                subType = itemSubType,
+                stackCount = itemStackCount,
+                equipLoc = itemEquipLoc,
+                iconID = iconFileDataID,
+                sellPrice = sellPrice,
+                classID = classID,
+                subClassID = subClassID
+            }
+        end
+    end
+
+    return nil
+end--- Safe item name getter (supports C_Item and GetItemInfo fallback).
+--- @param itemID number|string The item ID or item link
+--- @return string The item name or "Item [ID]" if not found
+function APR:GetItemName(itemID)
+    if not itemID then
+        return "Unknown Item"
+    end
+
+    -- Modern API (WoW 10.0+)
+    if C_Item and C_Item.GetItemNameByID then
+        local name = C_Item.GetItemNameByID(itemID)
+        return name or ("Item " .. tostring(itemID))
+    end
+
+    -- Fallback to full GetItemInfo
+    local itemInfo = APR:GetItemInfo(itemID)
+    return (itemInfo and itemInfo.name) or ("Item " .. tostring(itemID))
+end
+
+--- Get item instant information (doesn't require server query)
+--- @param itemID number|string The item ID or item link
+--- @return number|nil itemID
+--- @return string|nil itemType
+--- @return string|nil itemSubType
+--- @return string|nil itemEquipLoc
+--- @return number|nil icon
+--- @return number|nil classID
+--- @return number|nil subClassID
+function APR:GetItemInfoInstant(itemID)
+    if not itemID then
+        return nil, nil, nil, nil, nil, nil, nil
+    end
+
+    -- Modern API (WoW 10.0+)
+    if C_Item and C_Item.GetItemInfoInstant then
+        return C_Item.GetItemInfoInstant(itemID)
+    end
+
+    ---@diagnostic disable-next-line: deprecated
+    -- Legacy fallback (deprecated but necessary for older WoW versions)
+    if GetItemInfoInstant then
+        ---@diagnostic disable-next-line: deprecated
+        return GetItemInfoInstant(itemID)
+    end
+
+    return nil, nil, nil, nil, nil, nil, nil
+end
+
+-- ═══════════════════════════════════════════════════════════════════════
+-- QUEST LOG API (C_QuestLog)
+-- ═══════════════════════════════════════════════════════════════════════
+
+--- Check if a quest is completed (account-wide)
+--- @param questID number The quest ID
+--- @return boolean True if quest is completed
+function APR:IsQuestFlaggedCompleted(questID)
+    if not questID or type(questID) ~= "number" then
+        return false
+    end
+
+    if C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted then
+        return C_QuestLog.IsQuestFlaggedCompleted(questID)
+    end
+
+    ---@diagnostic disable-next-line: deprecated
+    if IsQuestFlaggedCompleted then
+        ---@diagnostic disable-next-line: deprecated
+        return IsQuestFlaggedCompleted(questID)
+    end
+
     return false
 end
 
-function APR:GetSpellName(spellID)
-    local spellInfo = (C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellID)) or nil
-    local name = spellInfo and spellInfo.name or GetSpellInfo(spellID)
-    return name or ("Spell " .. tostring(spellID))
+--- Get quest title by ID
+--- @param questID number The quest ID
+--- @return string|nil The quest title or nil
+function APR:GetQuestTitle(questID)
+    if not questID or type(questID) ~= "number" then
+        return nil
+    end
+
+    if C_QuestLog and C_QuestLog.GetTitleForQuestID then
+        return C_QuestLog.GetTitleForQuestID(questID)
+    end
+
+    ---@diagnostic disable-next-line: deprecated
+    if GetQuestLogTitle then
+        ---@diagnostic disable-next-line: deprecated
+        return GetQuestLogTitle(questID)
+    end
+
+    return nil
 end
 
--- Safe item name getter (supports C_Item and GetItemInfo fallback).
-function APR:GetItemName(itemID)
-    if C_Item and C_Item.GetItemNameByID then
-        return C_Item.GetItemNameByID(itemID) or ("Item " .. tostring(itemID))
-    end
-    return "Item " .. tostring(itemID)
-end
+-- ═══════════════════════════════════════════════════════════════════════
+-- CHARACTER & GAMEPLAY FUNCTIONS
+-- ═══════════════════════════════════════════════════════════════════════
 
 -- Checks if the Player have flying rank 1, 2 or 3
 function APR:CheckFlySkill()
