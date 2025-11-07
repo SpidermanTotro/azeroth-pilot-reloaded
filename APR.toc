@@ -73,5 +73,7 @@ APR-Core/Heirloom.lua
 APR-Core/RouteSelection.lua
 APR-Core/Buff.lua
 APR-Core/StatusReport.lua
+APR-Core/GatheringTracker.lua
+APR-Core/AdvancedFeatures.lua
 
 Routes/RouteList.xml
