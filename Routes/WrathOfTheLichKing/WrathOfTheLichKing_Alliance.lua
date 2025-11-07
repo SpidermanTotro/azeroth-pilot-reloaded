@@ -903,4 +903,301 @@ if APR.Faction == "Alliance" then
             _index = 18,
         },
     }
+
+    -- ==================== BOREAN TUNDRA ====================
+    -- Alliance starting zone in Northrend (68-71)
+    -- Valiance Keep hub
+
+    APR.RouteQuestStepList["68-BoreanTundra-Alliance"] = {
+        {
+            PickUp = { 11587 }, -- The Magical Kingdom of Dalaran (breadcrumb from Stormwind)
+            Coord = { x = -8865.8, y = 667.9 },
+            Zone = 84, -- Stormwind
+            _index = 1,
+        },
+        {
+            UseFlightPath = { npc = 352, from = 84, to = 84 }, -- Fly to Stormwind Harbor
+            Coord = { x = -8381.2, y = 523.4 },
+            Zone = 84,
+            _index = 2,
+        },
+        {
+            PickUp = { 11708 }, -- To Northrend!
+            Coord = { x = -8532.5, y = 1342.1 },
+            Zone = 84,
+            _index = 3,
+        },
+        {
+            Qpart = { [11708] = { 1 } }, -- Board the ship
+            Coord = { x = -8562.3, y = 1456.8 },
+            Range = 10,
+            Zone = 84,
+            _index = 4,
+        },
+        {
+            Done = { 11708 },
+            Coord = { x = 2226.5, y = 5257.8 },
+            Zone = 114, -- Borean Tundra
+            _index = 5,
+        },
+        {
+            PickUp = { 11711 }, -- The Siege
+            Coord = { x = 2258.4, y = 5211.2 },
+            Zone = 114,
+            _index = 6,
+        },
+        {
+            GetFP = { npc = 26560 }, -- Valiance Keep flight master
+            Coord = { x = 2285.1, y = 5135.6 },
+            Zone = 114,
+            _index = 7,
+        },
+        {
+            PickUp = { 11712, 11714 }, -- Enlistment Day, A Time for Heroes
+            Coord = { x = 2256.8, y = 5236.4 },
+            Zone = 114,
+            _index = 8,
+        },
+        {
+            Qpart = { [11712] = { 1 } }, -- Talk to recruiter
+            Coord = { x = 2262.4, y = 5255.8 },
+            Range = 5,
+            Zone = 114,
+            _index = 9,
+        },
+        {
+            Done = { 11712 },
+            Coord = { x = 2256.8, y = 5236.4 },
+            Zone = 114,
+            _index = 10,
+        },
+        {
+            PickUp = { 11715 }, -- Sniff Out the Enemy
+            Coord = { x = 2304.5, y = 5362.1 },
+            Zone = 114,
+            _index = 11,
+        },
+        {
+            Qpart = { [11715] = { 1 } }, -- Use Sniffer to find Scourge
+            Coord = { x = 2456.8, y = 5512.3 },
+            Button = { ["11715-1"] = 35127 },
+            Range = 50,
+            Zone = 114,
+            _index = 12,
+        },
+        {
+            Done = { 11715 },
+            Coord = { x = 2304.5, y = 5362.1 },
+            Zone = 114,
+            _index = 13,
+        },
+        {
+            PickUp = { 11716 }, -- Ride Over to the Staging Grounds
+            Coord = { x = 2282.4, y = 5138.9 },
+            Zone = 114,
+            _index = 14,
+        },
+        {
+            Qpart = { [11716] = { 1 } }, -- Ride to Farshire
+            Coord = { x = 1766.5, y = 5180.2 },
+            Range = 20,
+            Zone = 114,
+            _index = 15,
+        },
+        {
+            Done = { 11716 },
+            Coord = { x = 1766.5, y = 5180.2 },
+            Zone = 114,
+            _index = 16,
+        },
+        {
+            PickUp = { 11692, 11708 }, -- Farshire quests
+            Coord = { x = 1758.6, y = 5188.4 },
+            Zone = 114,
+            _index = 17,
+        },
+        {
+            Qpart = { [11692] = { 1 } }, -- Kill Scourge for meat
+            Coord = { x = 1845.3, y = 5256.7 },
+            Range = 80,
+            Zone = 114,
+            _index = 18,
+        },
+        {
+            Done = { 11692 },
+            Coord = { x = 1758.6, y = 5188.4 },
+            Zone = 114,
+            _index = 19,
+        },
+        {
+            RouteCompleted = true,
+            _index = 20,
+        },
+    }
+
+    -- ==================== HOWLING FJORD ====================
+    -- Alliance starting zone in Northrend (68-71)
+    -- Valgarde hub
+
+    APR.RouteQuestStepList["68-HowlingFjord-Alliance"] = {
+        {
+            PickUp = { 11229 }, -- They Stole Our Men! (breadcrumb)
+            Coord = { x = -8347.6, y = 534.8 },
+            Zone = 84, -- Stormwind Harbor
+            _index = 1,
+        },
+        {
+            Qpart = { [11229] = { 1 } }, -- Board the ship to Howling Fjord
+            Coord = { x = -8523.4, y = 1348.2 },
+            Range = 10,
+            Zone = 84,
+            _index = 2,
+        },
+        {
+            Done = { 11229 },
+            Coord = { x = 682.5, y = -3978.4 },
+            Zone = 117, -- Howling Fjord
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 24061 }, -- Valgarde flight master
+            Coord = { x = 683.2, y = -4015.6 },
+            Zone = 117,
+            _index = 4,
+        },
+        {
+            PickUp = { 11230, 11232 }, -- Valgarde quests
+            Coord = { x = 672.5, y = -4018.3 },
+            Zone = 117,
+            _index = 5,
+        },
+        {
+            Qpart = { [11230] = { 1 } }, -- Kill Dragonflayer Vrykul
+            Coord = { x = 534.6, y = -3856.7 },
+            Range = 80,
+            Zone = 117,
+            _index = 6,
+        },
+        {
+            Done = { 11230 },
+            Coord = { x = 672.5, y = -4018.3 },
+            Zone = 117,
+            _index = 7,
+        },
+        {
+            PickUp = { 11233 }, -- Rescue the Prisoners
+            Coord = { x = 665.8, y = -4024.1 },
+            Zone = 117,
+            _index = 8,
+        },
+        {
+            Qpart = { [11233] = { 1 } }, -- Rescue 5 Valgarde Prisoners
+            Coord = { x = 534.6, y = -3856.7 },
+            Range = 80,
+            Zone = 117,
+            _index = 9,
+        },
+        {
+            Done = { 11233 },
+            Coord = { x = 665.8, y = -4024.1 },
+            Zone = 117,
+            _index = 10,
+        },
+        {
+            PickUp = { 11234 }, -- The Path to Utgarde
+            Coord = { x = 678.4, y = -4012.5 },
+            Zone = 117,
+            _index = 11,
+        },
+        {
+            Qpart = { [11234] = { 1 } }, -- Scout the path
+            Coord = { x = 445.8, y = -3723.5 },
+            Range = 20,
+            Zone = 117,
+            _index = 12,
+        },
+        {
+            Done = { 11234 },
+            Coord = { x = 678.4, y = -4012.5 },
+            Zone = 117,
+            _index = 13,
+        },
+        {
+            RouteCompleted = true,
+            _index = 14,
+        },
+    }
+
+    -- ==================== DRAGONBLIGHT ====================
+    -- Major hub zone (71-74)
+    -- Wintergarde Keep / Stars Rest
+
+    APR.RouteQuestStepList["71-Dragonblight-Alliance"] = {
+        {
+            PickUp = { 12118 }, -- Conversing With the Depths (breadcrumb)
+            Coord = { x = 2285.6, y = 5134.8 },
+            Zone = 114, -- From Borean Tundra
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 114, to = 115 }, -- Fly to Dragonblight
+            Coord = { x = 2285.6, y = 5134.8 },
+            Zone = 114,
+            _index = 2,
+        },
+        {
+            Done = { 12118 },
+            Coord = { x = 3701.5, y = -786.4 },
+            Zone = 115, -- Dragonblight
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 26878 }, -- Stars' Rest flight master
+            Coord = { x = 3682.4, y = -723.5 },
+            Zone = 115,
+            _index = 4,
+        },
+        {
+            PickUp = { 12119, 12120 }, -- Stars' Rest quests
+            Coord = { x = 3695.8, y = -745.2 },
+            Zone = 115,
+            _index = 5,
+        },
+        {
+            Qpart = { [12119] = { 1 } }, -- Slay Azure Dragonspawn
+            Coord = { x = 3856.4, y = -623.7 },
+            Range = 80,
+            Zone = 115,
+            _index = 6,
+        },
+        {
+            Done = { 12119 },
+            Coord = { x = 3695.8, y = -745.2 },
+            Zone = 115,
+            _index = 7,
+        },
+        {
+            PickUp = { 12121 }, -- The Cleansing of Jintha'kalar
+            Coord = { x = 3688.5, y = -738.9 },
+            Zone = 115,
+            _index = 8,
+        },
+        {
+            Qpart = { [12121] = { 1 } }, -- Cleanse the shrine
+            Coord = { x = 3564.7, y = -512.8 },
+            Range = 50,
+            Zone = 115,
+            _index = 9,
+        },
+        {
+            Done = { 12121 },
+            Coord = { x = 3688.5, y = -738.9 },
+            Zone = 115,
+            _index = 10,
+        },
+        {
+            RouteCompleted = true,
+            _index = 11,
+        },
+    }
 end

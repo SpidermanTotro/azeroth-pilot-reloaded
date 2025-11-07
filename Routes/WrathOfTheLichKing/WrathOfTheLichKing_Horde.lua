@@ -882,4 +882,257 @@ if APR.Faction == "Horde" then
             _index = 15,
         },
     }
+
+    -- ==================== BOREAN TUNDRA ====================
+    -- Horde starting zone in Northrend (68-71)
+    -- Warsong Hold hub
+
+    APR.RouteQuestStepList["68-BoreanTundra-Horde"] = {
+        {
+            PickUp = { 11597 }, -- The Magical Kingdom of Dalaran (breadcrumb from Orgrimmar)
+            Coord = { x = 1574.8, y = -4370.2 },
+            Zone = 85, -- Orgrimmar
+            _index = 1,
+        },
+        {
+            PickUp = { 11609 }, -- To Northrend!
+            Coord = { x = 1838.5, y = -4376.8 },
+            Zone = 85,
+            _index = 2,
+        },
+        {
+            Qpart = { [11609] = { 1 } }, -- Board the zeppelin
+            Coord = { x = 2065.4, y = -4389.6 },
+            Range = 10,
+            Zone = 85,
+            _index = 3,
+        },
+        {
+            Done = { 11609 },
+            Coord = { x = 2951.8, y = 6217.3 },
+            Zone = 114, -- Borean Tundra
+            _index = 4,
+        },
+        {
+            PickUp = { 11585 }, -- The Warsong Offensive
+            Coord = { x = 2956.4, y = 6214.8 },
+            Zone = 114,
+            _index = 5,
+        },
+        {
+            GetFP = { npc = 26850 }, -- Warsong Hold flight master
+            Coord = { x = 2887.5, y = 6256.4 },
+            Zone = 114,
+            _index = 6,
+        },
+        {
+            PickUp = { 11586, 11587 }, -- Warsong Hold quests
+            Coord = { x = 2934.6, y = 6298.7 },
+            Zone = 114,
+            _index = 7,
+        },
+        {
+            Qpart = { [11586] = { 1 } }, -- Kill Taunka enemies
+            Coord = { x = 2756.8, y = 6156.4 },
+            Range = 80,
+            Zone = 114,
+            _index = 8,
+        },
+        {
+            Done = { 11586 },
+            Coord = { x = 2934.6, y = 6298.7 },
+            Zone = 114,
+            _index = 9,
+        },
+        {
+            PickUp = { 11588 }, -- Hellscream's Champion
+            Coord = { x = 2951.8, y = 6276.5 },
+            Zone = 114,
+            _index = 10,
+        },
+        {
+            Qpart = { [11588] = { 1 } }, -- Kill Scourge forces
+            Coord = { x = 3145.6, y = 6412.8 },
+            Range = 80,
+            Zone = 114,
+            _index = 11,
+        },
+        {
+            Done = { 11588 },
+            Coord = { x = 2951.8, y = 6276.5 },
+            Zone = 114,
+            _index = 12,
+        },
+        {
+            RouteCompleted = true,
+            _index = 13,
+        },
+    }
+
+    -- ==================== HOWLING FJORD ====================
+    -- Horde starting zone in Northrend (68-71)
+    -- Vengeance Landing / New Agamand hubs
+
+    APR.RouteQuestStepList["68-HowlingFjord-Horde"] = {
+        {
+            PickUp = { 11298 }, -- To Vengeance Landing! (breadcrumb)
+            Coord = { x = 2065.4, y = -4389.6 },
+            Zone = 85, -- Orgrimmar zeppelin tower
+            _index = 1,
+        },
+        {
+            Qpart = { [11298] = { 1 } }, -- Board the zeppelin to Howling Fjord
+            Coord = { x = 2065.4, y = -4389.6 },
+            Range = 10,
+            Zone = 85,
+            _index = 2,
+        },
+        {
+            Done = { 11298 },
+            Coord = { x = 352.8, y = -5648.7 },
+            Zone = 117, -- Howling Fjord
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 23859 }, -- Vengeance Landing flight master
+            Coord = { x = 368.5, y = -5623.4 },
+            Zone = 117,
+            _index = 4,
+        },
+        {
+            PickUp = { 11299, 11300 }, -- Vengeance Landing quests
+            Coord = { x = 356.7, y = -5638.9 },
+            Zone = 117,
+            _index = 5,
+        },
+        {
+            Qpart = { [11299] = { 1 } }, -- Kill Alliance soldiers
+            Coord = { x = 268.4, y = -5512.6 },
+            Range = 80,
+            Zone = 117,
+            _index = 6,
+        },
+        {
+            Done = { 11299 },
+            Coord = { x = 356.7, y = -5638.9 },
+            Zone = 117,
+            _index = 7,
+        },
+        {
+            PickUp = { 11301 }, -- The Embalmer's Revenge
+            Coord = { x = 342.5, y = -5651.2 },
+            Zone = 117,
+            _index = 8,
+        },
+        {
+            Qpart = { [11301] = { 1 } }, -- Reanimate corpses
+            Coord = { x = 268.4, y = -5512.6 },
+            Button = { ["11301-1"] = 33687 },
+            Range = 80,
+            Zone = 117,
+            _index = 9,
+        },
+        {
+            Done = { 11301 },
+            Coord = { x = 342.5, y = -5651.2 },
+            Zone = 117,
+            _index = 10,
+        },
+        {
+            PickUp = { 11302 }, -- Into the Fold
+            Coord = { x = 365.8, y = -5634.1 },
+            Zone = 117,
+            _index = 11,
+        },
+        {
+            Qpart = { [11302] = { 1 } }, -- Free Vrykul prisoners
+            Coord = { x = 445.6, y = -5789.3 },
+            Range = 50,
+            Zone = 117,
+            _index = 12,
+        },
+        {
+            Done = { 11302 },
+            Coord = { x = 365.8, y = -5634.1 },
+            Zone = 117,
+            _index = 13,
+        },
+        {
+            RouteCompleted = true,
+            _index = 14,
+        },
+    }
+
+    -- ==================== DRAGONBLIGHT ====================
+    -- Major hub zone (71-74)
+    -- Agmar's Hammer hub
+
+    APR.RouteQuestStepList["71-Dragonblight-Horde"] = {
+        {
+            PickUp = { 12187 }, -- The Might of the Horde (breadcrumb)
+            Coord = { x = 2887.5, y = 6256.4 },
+            Zone = 114, -- From Borean Tundra
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 114, to = 115 }, -- Fly to Dragonblight
+            Coord = { x = 2887.5, y = 6256.4 },
+            Zone = 114,
+            _index = 2,
+        },
+        {
+            Done = { 12187 },
+            Coord = { x = 3764.5, y = 987.6 },
+            Zone = 115, -- Dragonblight
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 26566 }, -- Agmar's Hammer flight master
+            Coord = { x = 3745.8, y = 1023.4 },
+            Zone = 115,
+            _index = 4,
+        },
+        {
+            PickUp = { 12188, 12189 }, -- Agmar's Hammer quests
+            Coord = { x = 3752.6, y = 1006.8 },
+            Zone = 115,
+            _index = 5,
+        },
+        {
+            Qpart = { [12188] = { 1 } }, -- Slay Magnataur
+            Coord = { x = 3896.7, y = 1156.3 },
+            Range = 80,
+            Zone = 115,
+            _index = 6,
+        },
+        {
+            Done = { 12188 },
+            Coord = { x = 3752.6, y = 1006.8 },
+            Zone = 115,
+            _index = 7,
+        },
+        {
+            PickUp = { 12190 }, -- Blightbeasts Be Damned!
+            Coord = { x = 3738.9, y = 1012.5 },
+            Zone = 115,
+            _index = 8,
+        },
+        {
+            Qpart = { [12190] = { 1 } }, -- Slay Blightbeasts
+            Coord = { x = 3645.7, y = 1234.8 },
+            Range = 80,
+            Zone = 115,
+            _index = 9,
+        },
+        {
+            Done = { 12190 },
+            Coord = { x = 3738.9, y = 1012.5 },
+            Zone = 115,
+            _index = 10,
+        },
+        {
+            RouteCompleted = true,
+            _index = 11,
+        },
+    }
 end
