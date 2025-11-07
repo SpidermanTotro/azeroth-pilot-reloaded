@@ -6,6 +6,7 @@
 
     <Script file="Routes/Cataclysm/Cataclysm_Alliance.lua"/>
     <Script file="Routes/Cataclysm/Cataclysm_Horde.lua"/>
+    <Script file="Routes/Cataclysm/TolBarad_MoltenFront.lua"/>
 
     <Script file="Routes/Dragonflight/Dragonflight.lua"/>
     <Script file="Routes/Dragonflight/Dragonflight_Alliance.lua"/>
@@ -26,6 +27,7 @@
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua"/>
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua"/>
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria.lua"/>
+    <Script file="Routes/MistsOfPandaria/TimelessIsle_IsleThu nder.lua"/>
 
     <Script file="Routes/Shadowlands/Shadowlands_Alliance.lua"/>
     <Script file="Routes/Shadowlands/Shadowlands_Horde.lua"/>
