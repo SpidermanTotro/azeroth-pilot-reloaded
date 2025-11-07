@@ -814,4 +814,407 @@ if APR.Faction == "Horde" then
             _index = 124,
         },
     }
+
+    -- ==================== HELLFIRE PENINSULA ====================
+    -- TBC starting zone (58-63)
+    -- Thrallmar (Horde hub)
+
+    APR.RouteQuestStepList["58-HellfirePeninsula-Horde"] = {
+        {
+            PickUp = { 10120 }, -- Through the Dark Portal (Horde)
+            Coord = { x = 1838.5, y = -4376.8 },
+            Zone = 85, -- Orgrimmar zeppelin tower
+            _index = 1,
+        },
+        {
+            Qpart = { [10120] = { 1 } }, -- Board zeppelin to Outland
+            Coord = { x = 2065.4, y = -4389.6 },
+            Range = 10,
+            Zone = 85,
+            _index = 2,
+        },
+        {
+            Done = { 10120 },
+            Coord = { x = -11640.5, y = 4017.8 },
+            Zone = 100, -- Hellfire Peninsula (Outland)
+            _index = 3,
+        },
+        {
+            PickUp = { 10289 }, -- Arrival in Outland (Horde)
+            Coord = { x = -11640.5, y = 4017.8 },
+            Zone = 100,
+            _index = 4,
+        },
+        {
+            Done = { 10289 },
+            Coord = { x = -11823.7, y = 4367.8 },
+            Zone = 100,
+            _index = 5,
+        },
+        {
+            PickUp = { 10121 }, -- Journey to Thrallmar
+            Coord = { x = -11823.7, y = 4367.8 },
+            Zone = 100,
+            _index = 6,
+        },
+        {
+            Done = { 10121 },
+            Coord = { x = -10367.9, y = 4123.6 },
+            Zone = 100,
+            _index = 7,
+        },
+        {
+            GetFP = { npc = 18785 }, -- Thrallmar flight master
+            Coord = { x = -10389.5, y = 4145.2 },
+            Zone = 100,
+            _index = 8,
+        },
+        {
+            PickUp = { 10250, 10251 }, -- Thrallmar quests
+            Coord = { x = -10356.4, y = 4112.8 },
+            Zone = 100,
+            _index = 9,
+        },
+        {
+            Qpart = { [10250] = { 1 } }, -- Demon forces
+            Coord = { x = -10512.3, y = 4234.7 },
+            Range = 80,
+            Zone = 100,
+            _index = 10,
+        },
+        {
+            Done = { 10250 },
+            Coord = { x = -10356.4, y = 4112.8 },
+            Zone = 100,
+            _index = 11,
+        },
+        {
+            RouteCompleted = true,
+            _index = 12,
+        },
+    }
+
+    -- ==================== ZANGARMARSH ====================
+    -- TBC zone (60-64)
+    -- Zabra'jin (Horde hub)
+
+    APR.RouteQuestStepList["60-Zangarmarsh-Horde"] = {
+        {
+            PickUp = { 9788 }, -- Zangarmarsh breadcrumb (Horde)
+            Coord = { x = -10389.5, y = 4145.2 },
+            Zone = 100, -- From Hellfire
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 100, to = 102 }, -- Fly to Zangarmarsh
+            Coord = { x = -10389.5, y = 4145.2 },
+            Zone = 100,
+            _index = 2,
+        },
+        {
+            Done = { 9788 },
+            Coord = { x = 1723.4, y = 6089.7 },
+            Zone = 102, -- Zangarmarsh
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 18791 }, -- Zabra'jin flight master
+            Coord = { x = 1745.8, y = 6112.3 },
+            Zone = 102,
+            _index = 4,
+        },
+        {
+            PickUp = { 9789, 9790 }, -- Zabra'jin quests
+            Coord = { x = 1712.6, y = 6078.9 },
+            Zone = 102,
+            _index = 5,
+        },
+        {
+            Qpart = { [9789] = { 1 } }, -- Naga scales
+            Coord = { x = 1856.7, y = 6234.5 },
+            Range = 80,
+            Zone = 102,
+            _index = 6,
+        },
+        {
+            Done = { 9789 },
+            Coord = { x = 1712.6, y = 6078.9 },
+            Zone = 102,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== TEROKKAR FOREST ====================
+    -- TBC zone (62-65)
+    -- Stonebreaker Hold (Horde hub)
+
+    APR.RouteQuestStepList["62-TerokkarForest-Horde"] = {
+        {
+            PickUp = { 9995 }, -- Terokkar Forest breadcrumb (Horde)
+            Coord = { x = 1745.8, y = 6112.3 },
+            Zone = 102, -- From Zangarmarsh
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 102, to = 108 }, -- Fly to Terokkar
+            Coord = { x = 1745.8, y = 6112.3 },
+            Zone = 102,
+            _index = 2,
+        },
+        {
+            Done = { 9995 },
+            Coord = { x = -3956.8, y = 4467.3 },
+            Zone = 108, -- Terokkar Forest
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 18807 }, -- Stonebreaker Hold flight master
+            Coord = { x = -3978.5, y = 4489.6 },
+            Zone = 108,
+            _index = 4,
+        },
+        {
+            PickUp = { 9996, 9997 }, -- Stonebreaker quests
+            Coord = { x = -3945.7, y = 4456.2 },
+            Zone = 108,
+            _index = 5,
+        },
+        {
+            Qpart = { [9996] = { 1 } }, -- Arakkoa threat
+            Coord = { x = -4078.4, y = 4367.9 },
+            Range = 80,
+            Zone = 108,
+            _index = 6,
+        },
+        {
+            Done = { 9996 },
+            Coord = { x = -3945.7, y = 4456.2 },
+            Zone = 108,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== NAGRAND ====================
+    -- TBC zone (64-67)
+    -- Garadar (Horde hub)
+
+    APR.RouteQuestStepList["64-Nagrand-Horde"] = {
+        {
+            PickUp = { 9934 }, -- Nagrand breadcrumb (Horde)
+            Coord = { x = -3978.5, y = 4489.6 },
+            Zone = 108, -- From Terokkar
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 108, to = 107 }, -- Fly to Nagrand
+            Coord = { x = -3978.5, y = 4489.6 },
+            Zone = 108,
+            _index = 2,
+        },
+        {
+            Done = { 9934 },
+            Coord = { x = -1423.6, y = 8789.5 },
+            Zone = 107, -- Nagrand
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 18809 }, -- Garadar flight master
+            Coord = { x = -1445.2, y = 8812.3 },
+            Zone = 107,
+            _index = 4,
+        },
+        {
+            PickUp = { 9935, 9936 }, -- Garadar quests
+            Coord = { x = -1412.8, y = 8778.4 },
+            Zone = 107,
+            _index = 5,
+        },
+        {
+            Qpart = { [9935] = { 1 } }, -- Talbuk hunting
+            Coord = { x = -1534.9, y = 8923.7 },
+            Range = 80,
+            Zone = 107,
+            _index = 6,
+        },
+        {
+            Done = { 9935 },
+            Coord = { x = -1412.8, y = 8778.4 },
+            Zone = 107,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== BLADE'S EDGE MOUNTAINS ====================
+    -- TBC zone (65-68)
+    -- Thunderlord Stronghold (Horde hub)
+
+    APR.RouteQuestStepList["65-BladesEdgeMountains-Horde"] = {
+        {
+            PickUp = { 10503 }, -- Blade's Edge breadcrumb (Horde)
+            Coord = { x = -1445.2, y = 8812.3 },
+            Zone = 107, -- From Nagrand
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 107, to = 105 }, -- Fly to Blade's Edge
+            Coord = { x = -1445.2, y = 8812.3 },
+            Zone = 107,
+            _index = 2,
+        },
+        {
+            Done = { 10503 },
+            Coord = { x = 5134.7, y = 2967.8 },
+            Zone = 105, -- Blade's Edge Mountains
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 20234 }, -- Thunderlord Stronghold flight master
+            Coord = { x = 5156.8, y = 2989.5 },
+            Zone = 105,
+            _index = 4,
+        },
+        {
+            PickUp = { 10505, 10508 }, -- Thunderlord quests
+            Coord = { x = 5123.9, y = 2956.3 },
+            Zone = 105,
+            _index = 5,
+        },
+        {
+            Qpart = { [10505] = { 1 } }, -- Ogre forces
+            Coord = { x = 5267.4, y = 3089.6 },
+            Range = 80,
+            Zone = 105,
+            _index = 6,
+        },
+        {
+            Done = { 10505 },
+            Coord = { x = 5123.9, y = 2956.3 },
+            Zone = 105,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== NETHERSTORM ====================
+    -- TBC zone (67-70)
+    -- Area 52 (neutral hub)
+
+    APR.RouteQuestStepList["67-Netherstorm-Horde"] = {
+        {
+            PickUp = { 10175 }, -- Netherstorm breadcrumb (Horde)
+            Coord = { x = 5156.8, y = 2989.5 },
+            Zone = 105, -- From Blade's Edge
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 105, to = 109 }, -- Fly to Netherstorm
+            Coord = { x = 5156.8, y = 2989.5 },
+            Zone = 105,
+            _index = 2,
+        },
+        {
+            Done = { 10175 },
+            Coord = { x = 3623.4, y = 6789.5 },
+            Zone = 109, -- Netherstorm
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 20515 }, -- Area 52 flight master
+            Coord = { x = 3645.8, y = 6812.3 },
+            Zone = 109,
+            _index = 4,
+        },
+        {
+            PickUp = { 10178, 10179 }, -- Area 52 quests
+            Coord = { x = 3612.7, y = 6778.4 },
+            Zone = 109,
+            _index = 5,
+        },
+        {
+            Qpart = { [10178] = { 1 } }, -- Mana cores
+            Coord = { x = 3734.9, y = 6923.6 },
+            Range = 80,
+            Zone = 109,
+            _index = 6,
+        },
+        {
+            Done = { 10178 },
+            Coord = { x = 3612.7, y = 6778.4 },
+            Zone = 109,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
+
+    -- ==================== SHADOWMOON VALLEY ====================
+    -- TBC zone (67-70)
+    -- Shadowmoon Village (Horde hub)
+
+    APR.RouteQuestStepList["67-ShadowmoonValley-Horde"] = {
+        {
+            PickUp = { 10572 }, -- Shadowmoon Valley breadcrumb (Horde)
+            Coord = { x = 3645.8, y = 6812.3 },
+            Zone = 109, -- From Netherstorm
+            _index = 1,
+        },
+        {
+            UseFlightPath = { from = 109, to = 104 }, -- Fly to Shadowmoon
+            Coord = { x = 3645.8, y = 6812.3 },
+            Zone = 109,
+            _index = 2,
+        },
+        {
+            Done = { 10572 },
+            Coord = { x = -3534.6, y = 1823.7 },
+            Zone = 104, -- Shadowmoon Valley
+            _index = 3,
+        },
+        {
+            GetFP = { npc = 19317 }, -- Shadowmoon Village flight master
+            Coord = { x = -3556.2, y = 1845.9 },
+            Zone = 104,
+            _index = 4,
+        },
+        {
+            PickUp = { 10573, 10574 }, -- Shadowmoon Village quests
+            Coord = { x = -3523.8, y = 1812.4 },
+            Zone = 104,
+            _index = 5,
+        },
+        {
+            Qpart = { [10573] = { 1 } }, -- Demon remnants
+            Coord = { x = -3645.7, y = 1934.8 },
+            Range = 80,
+            Zone = 104,
+            _index = 6,
+        },
+        {
+            Done = { 10573 },
+            Coord = { x = -3523.8, y = 1812.4 },
+            Zone = 104,
+            _index = 7,
+        },
+        {
+            RouteCompleted = true,
+            _index = 8,
+        },
+    }
 end

@@ -39,7 +39,15 @@ if (APR.Faction == "Alliance") then
         ["224-TheCapeofStranglethorn"] = L["Cape of Stranglethorn"],
 
     }
-    APR.RouteList.TheBurningCrusade = {}
+    APR.RouteList.TheBurningCrusade = {
+        ["58-HellfirePeninsula-Alliance"] = L["TBC - Hellfire Peninsula"],
+        ["60-Zangarmarsh-Alliance"] = L["TBC - Zangarmarsh"],
+        ["62-TerokkarForest-Alliance"] = L["TBC - Terokkar Forest"],
+        ["64-Nagrand-Alliance"] = L["TBC - Nagrand"],
+        ["65-BladesEdgeMountains-Alliance"] = L["TBC - Blade's Edge Mountains"],
+        ["67-Netherstorm-Alliance"] = L["TBC - Netherstorm"],
+        ["67-ShadowmoonValley-Alliance"] = L["TBC - Shadowmoon Valley"],
+    }
     APR.RouteList.WrathOfTheLichKing = {
         ["68-BoreanTundra-Alliance"] = L["WotLK - Borean Tundra"],
         ["68-HowlingFjord-Alliance"] = L["WotLK - Howling Fjord"],

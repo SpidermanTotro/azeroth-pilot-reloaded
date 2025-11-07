@@ -14,7 +14,15 @@ if (APR.Faction == "Horde") then
         ["25-Hillsbrad"] = L["WIP - Hillsbrad Foothills"],
         ["22-Western Plaguelands"] = L["WIP - Western Plaguelands"],
     }
-    APR.RouteList.TheBurningCrusade = {}
+    APR.RouteList.TheBurningCrusade = {
+        ["58-HellfirePeninsula-Horde"] = L["TBC - Hellfire Peninsula"],
+        ["60-Zangarmarsh-Horde"] = L["TBC - Zangarmarsh"],
+        ["62-TerokkarForest-Horde"] = L["TBC - Terokkar Forest"],
+        ["64-Nagrand-Horde"] = L["TBC - Nagrand"],
+        ["65-BladesEdgeMountains-Horde"] = L["TBC - Blade's Edge Mountains"],
+        ["67-Netherstorm-Horde"] = L["TBC - Netherstorm"],
+        ["67-ShadowmoonValley-Horde"] = L["TBC - Shadowmoon Valley"],
+    }
     APR.RouteList.WrathOfTheLichKing = {
         ["68-BoreanTundra-Horde"] = L["WotLK - Borean Tundra"],
         ["68-HowlingFjord-Horde"] = L["WotLK - Howling Fjord"],
