@@ -27,7 +27,7 @@
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua"/>
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua"/>
     <Script file="Routes/MistsOfPandaria/MistsOfPandaria.lua"/>
-    <Script file="Routes/MistsOfPandaria/TimelessIsle_IsleThu nder.lua"/>
+    <Script file="Routes/MistsOfPandaria/TimelessIsle_IsleThunder.lua"/>
 
     <Script file="Routes/Shadowlands/Shadowlands_Alliance.lua"/>
     <Script file="Routes/Shadowlands/Shadowlands_Horde.lua"/>

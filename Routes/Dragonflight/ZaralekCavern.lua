@@ -57,7 +57,7 @@ APR.RouteQuestStepList["70-ZaralekCavern-LoammNiffen"] = {
         _index = 2,
     },
     {
-        Done = { [75626] },
+        Done = { 75626 },
         PickUp = { 75627, 75628, 75629 },  -- Niffen dailies
         Coord = { x = 1245.8, y = -1265.3 },
         Zone = 2133,
