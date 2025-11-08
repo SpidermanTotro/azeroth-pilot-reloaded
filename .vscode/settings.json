@@ -29,5 +29,7 @@
     },
     "Lua.workspace.library": [
         "~/.vscode-remote/extensions/ketho.wow-api-0.21.0/Annotations/Core"
-    ]
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.pythonProjects": []
 }
