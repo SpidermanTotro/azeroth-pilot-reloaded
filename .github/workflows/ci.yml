@@ -40,3 +40,19 @@ jobs:
           else
             echo "luac not found on runner; skipping lua syntax check"
           fi
+
+      - name: Install luacheck
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y lua5.1 luarocks
+          sudo luarocks install luacheck || true
+
+      - name: Run luacheck
+        run: |
+          if command -v luacheck >/dev/null 2>&1; then
+            echo "Running luacheck with .luacheckrc"
+            # fail the job if luacheck returns non-zero
+            luacheck --config .luacheckrc . || exit $?
+          else
+            echo "luacheck not available; skipping"
+          fi
