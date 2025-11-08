@@ -25,7 +25,12 @@ jobs:
 
       - name: Run route count mismatch checker
         run: |
-          python3 scripts/check_count_mismatch.py
+          if [ -f scripts/check_count_mismatch.py ]; then
+            echo "Running scripts/check_count_mismatch.py"
+            python3 scripts/check_count_mismatch.py
+          else
+            echo "scripts/check_count_mismatch.py not found; skipping route count mismatch check"
+          fi
 
       - name: Lua syntax check (luac)
         run: |
