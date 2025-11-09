@@ -1,0 +1,110 @@
+# Route validation report
+
+Summary:
+
+- total_files: 45
+- files_missing: 1
+- zero_quest_files: 1
+- bracketed_syntax: 43
+- missing__index: 0
+
+## Files with issues
+
+- Kalimdor_Alliance.lua (path: Routes/Vanilla/Kalimdor_Alliance.lua)
+  - bracketed_numeric_keys
+- EasternKingdoms_Alliance.lua (path: Routes/Vanilla/EasternKingdoms_Alliance.lua)
+  - bracketed_numeric_keys
+- TheWarWithin.lua (path: Routes/TheWarWithin/TheWarWithin.lua)
+  - bracketed_numeric_keys
+- BattleForAzeroth_Alliance.lua (path: Routes/BattleForAzeroth/BattleForAzeroth_Alliance.lua)
+  - bracketed_numeric_keys
+- Legion.lua (path: Routes/Legion/Legion.lua)
+  - bracketed_numeric_keys
+- BattleForAzeroth_Horde.lua (path: Routes/BattleForAzeroth/BattleForAzeroth_Horde.lua)
+  - bracketed_numeric_keys
+- WarlordsOfDraenor_Horde.lua (path: Routes/WarlordsOfDraenor/WarlordsOfDraenor_Horde.lua)
+  - bracketed_numeric_keys
+- Shadowlands.lua (path: Routes/Shadowlands/Shadowlands.lua)
+  - bracketed_numeric_keys
+- MistsOfPandaria_Alliance.lua (path: Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua)
+  - bracketed_numeric_keys
+- MistsOfPandaria_Horde.lua (path: Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua)
+  - bracketed_numeric_keys
+- MistsOfPandaria.lua (path: Routes/MistsOfPandaria/MistsOfPandaria.lua)
+  - bracketed_numeric_keys
+- 10-70-Ally-EclipseGlaives.lua (path: Routes/Custom/10-70-Ally-EclipseGlaives.lua)
+  - bracketed_numeric_keys
+- Dragonflight.lua (path: Routes/Dragonflight/Dragonflight.lua)
+  - bracketed_numeric_keys
+- Shadowlands_Horde.lua (path: Routes/Shadowlands/Shadowlands_Horde.lua)
+  - bracketed_numeric_keys
+- Shadowlands_Alliance.lua (path: Routes/Shadowlands/Shadowlands_Alliance.lua)
+  - bracketed_numeric_keys
+- WarlordsOfDraenor_Alliance.lua (path: Routes/WarlordsOfDraenor/WarlordsOfDraenor_Alliance.lua)
+  - bracketed_numeric_keys
+- Kalimdor_Horde.lua (path: Routes/Vanilla/Kalimdor_Horde.lua)
+  - bracketed_numeric_keys
+- EasternKingdoms_Horde.lua (path: Routes/Vanilla/EasternKingdoms_Horde.lua)
+  - bracketed_numeric_keys
+- Legion_Horde.lua (path: Routes/Legion/Legion_Horde.lua)
+  - bracketed_numeric_keys
+- Cataclysm_Horde.lua (path: Routes/Cataclysm/Cataclysm_Horde.lua)
+  - bracketed_numeric_keys
+- Legion_Alliance.lua (path: Routes/Legion/Legion_Alliance.lua)
+  - bracketed_numeric_keys
+- Cataclysm_Alliance.lua (path: Routes/Cataclysm/Cataclysm_Alliance.lua)
+  - bracketed_numeric_keys
+- Dragonflight_Alliance.lua (path: Routes/Dragonflight/Dragonflight_Alliance.lua)
+  - bracketed_numeric_keys
+- Dragonflight_horde.lua (path: Routes/Dragonflight/Dragonflight_horde.lua)
+  - bracketed_numeric_keys
+- ExilesReach_Horde.lua (path: Routes/ExilesReach/ExilesReach_Horde.lua)
+  - bracketed_numeric_keys
+- ExilesReach_Alliance.lua (path: Routes/ExilesReach/ExilesReach_Alliance.lua)
+  - bracketed_numeric_keys
+- WrathOfTheLichKing_Horde.lua (path: Routes/WrathOfTheLichKing/WrathOfTheLichKing_Horde.lua)
+  - bracketed_numeric_keys
+- WrathOfTheLichKing_Alliance.lua (path: Routes/WrathOfTheLichKing/WrathOfTheLichKing_Alliance.lua)
+  - bracketed_numeric_keys
+- Argus.lua (path: Routes/Legion/Argus.lua)
+  - bracketed_numeric_keys
+- Suramar.lua (path: Routes/Legion/Suramar.lua)
+  - bracketed_numeric_keys
+- TheBurningCrusade_Horde.lua (path: Routes/TheBurningCrusade/TheBurningCrusade_Horde.lua)
+  - bracketed_numeric_keys
+- Nazjatar_Mechagon.lua (path: Routes/BattleForAzeroth/Nazjatar_Mechagon.lua)
+  - bracketed_numeric_keys
+- TimelessIsle_IsleThunder.lua (path: Routes/MistsOfPandaria/TimelessIsle_IsleThunder.lua)
+  - bracketed_numeric_keys
+- TolBarad_MoltenFront.lua (path: Routes/Cataclysm/TolBarad_MoltenFront.lua)
+  - bracketed_numeric_keys
+- Korthia_ZerethMortis.lua (path: Routes/Shadowlands/Korthia_ZerethMortis.lua)
+  - bracketed_numeric_keys
+- EmeraldDream.lua (path: Routes/Dragonflight/EmeraldDream.lua)
+  - bracketed_numeric_keys
+- AzjKahet.lua (path: Routes/TheWarWithin/AzjKahet.lua)
+  - bracketed_numeric_keys
+- RingingDeeps.lua (path: Routes/TheWarWithin/RingingDeeps.lua)
+  - bracketed_numeric_keys
+- Hallowfall.lua (path: Routes/TheWarWithin/Hallowfall.lua)
+  - bracketed_numeric_keys
+- IsleOfDorn.lua (path: Routes/TheWarWithin/IsleOfDorn.lua)
+  - bracketed_numeric_keys
+- BrokenShore.lua (path: Routes/Legion/BrokenShore.lua)
+  - bracketed_numeric_keys
+- ZaralekCavern.lua (path: Routes/Dragonflight/ZaralekCavern.lua)
+  - bracketed_numeric_keys
+- TheBurningCrusade_Alliance.lua (path: Routes/TheBurningCrusade/TheBurningCrusade_Alliance.lua)
+  - bracketed_numeric_keys
+- delves.lua (path: Routes/TheWarWithin/delves.lua)
+  - zero_quest_count
+- route_file (path: None)
+  - file_missing
+
+## Recommended automated fixes
+
+- Fix bracketed numeric keys: replace patterns like `Done = { [12345] }` with `Done = { 12345 }`.
+- Add `_index = N` fields to step tables when missing; use the order of steps as index.
+- Remove placeholder files or populate them with route steps (e.g., delves.lua).
+- Migrate legacy API calls via `APR.Core.Compat` wrappers.
+- Re-run parity report after fixes.

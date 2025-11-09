@@ -1,0 +1,15 @@
+{
+  "mismatches": [
+    {
+      "expansion": "expansion",
+      "route_file": "route_file",
+      "reported": 0,
+      "actual": 1,
+      "ids": [
+        "unique_quest_ids"
+      ]
+    }
+  ],
+  "total_rows": 45,
+  "mismatch_count": 1
+}

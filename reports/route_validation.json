@@ -1,0 +1,416 @@
+{
+  "summary": {
+    "total_files": 45,
+    "files_missing": 1,
+    "zero_quest_files": 1,
+    "bracketed_syntax": 43,
+    "missing_index": 0
+  },
+  "results": [
+    {
+      "route_file": "route_file",
+      "path": null,
+      "reported_count": 0,
+      "actual_count": 1,
+      "issues": [
+        "file_missing"
+      ]
+    },
+    {
+      "route_file": "BattleForAzeroth_Horde.lua",
+      "path": "Routes/BattleForAzeroth/BattleForAzeroth_Horde.lua",
+      "reported_count": 421,
+      "actual_count": 421,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Nazjatar_Mechagon.lua",
+      "path": "Routes/BattleForAzeroth/Nazjatar_Mechagon.lua",
+      "reported_count": 28,
+      "actual_count": 28,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "BattleForAzeroth_Alliance.lua",
+      "path": "Routes/BattleForAzeroth/BattleForAzeroth_Alliance.lua",
+      "reported_count": 494,
+      "actual_count": 494,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "BrokenShore.lua",
+      "path": "Routes/Legion/BrokenShore.lua",
+      "reported_count": 20,
+      "actual_count": 20,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Argus.lua",
+      "path": "Routes/Legion/Argus.lua",
+      "reported_count": 31,
+      "actual_count": 31,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Legion_Horde.lua",
+      "path": "Routes/Legion/Legion_Horde.lua",
+      "reported_count": 107,
+      "actual_count": 107,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Legion.lua",
+      "path": "Routes/Legion/Legion.lua",
+      "reported_count": 479,
+      "actual_count": 479,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Suramar.lua",
+      "path": "Routes/Legion/Suramar.lua",
+      "reported_count": 31,
+      "actual_count": 31,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Legion_Alliance.lua",
+      "path": "Routes/Legion/Legion_Alliance.lua",
+      "reported_count": 88,
+      "actual_count": 88,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "ZaralekCavern.lua",
+      "path": "Routes/Dragonflight/ZaralekCavern.lua",
+      "reported_count": 19,
+      "actual_count": 19,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "EmeraldDream.lua",
+      "path": "Routes/Dragonflight/EmeraldDream.lua",
+      "reported_count": 23,
+      "actual_count": 23,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Dragonflight_Alliance.lua",
+      "path": "Routes/Dragonflight/Dragonflight_Alliance.lua",
+      "reported_count": 68,
+      "actual_count": 68,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Dragonflight_horde.lua",
+      "path": "Routes/Dragonflight/Dragonflight_horde.lua",
+      "reported_count": 68,
+      "actual_count": 68,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Dragonflight.lua",
+      "path": "Routes/Dragonflight/Dragonflight.lua",
+      "reported_count": 302,
+      "actual_count": 302,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "ExilesReach_Horde.lua",
+      "path": "Routes/ExilesReach/ExilesReach_Horde.lua",
+      "reported_count": 52,
+      "actual_count": 52,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "ExilesReach_Alliance.lua",
+      "path": "Routes/ExilesReach/ExilesReach_Alliance.lua",
+      "reported_count": 52,
+      "actual_count": 52,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "WrathOfTheLichKing_Horde.lua",
+      "path": "Routes/WrathOfTheLichKing/WrathOfTheLichKing_Horde.lua",
+      "reported_count": 46,
+      "actual_count": 46,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "WrathOfTheLichKing_Alliance.lua",
+      "path": "Routes/WrathOfTheLichKing/WrathOfTheLichKing_Alliance.lua",
+      "reported_count": 46,
+      "actual_count": 46,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "MistsOfPandaria_Alliance.lua",
+      "path": "Routes/MistsOfPandaria/MistsOfPandaria_Alliance.lua",
+      "reported_count": 322,
+      "actual_count": 322,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "MistsOfPandaria.lua",
+      "path": "Routes/MistsOfPandaria/MistsOfPandaria.lua",
+      "reported_count": 315,
+      "actual_count": 315,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "MistsOfPandaria_Horde.lua",
+      "path": "Routes/MistsOfPandaria/MistsOfPandaria_Horde.lua",
+      "reported_count": 322,
+      "actual_count": 322,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "TimelessIsle_IsleThunder.lua",
+      "path": "Routes/MistsOfPandaria/TimelessIsle_IsleThunder.lua",
+      "reported_count": 28,
+      "actual_count": 28,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "WarlordsOfDraenor_Alliance.lua",
+      "path": "Routes/WarlordsOfDraenor/WarlordsOfDraenor_Alliance.lua",
+      "reported_count": 285,
+      "actual_count": 285,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "WarlordsOfDraenor_Horde.lua",
+      "path": "Routes/WarlordsOfDraenor/WarlordsOfDraenor_Horde.lua",
+      "reported_count": 398,
+      "actual_count": 398,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Cataclysm_Horde.lua",
+      "path": "Routes/Cataclysm/Cataclysm_Horde.lua",
+      "reported_count": 98,
+      "actual_count": 98,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Cataclysm_Alliance.lua",
+      "path": "Routes/Cataclysm/Cataclysm_Alliance.lua",
+      "reported_count": 82,
+      "actual_count": 82,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "TolBarad_MoltenFront.lua",
+      "path": "Routes/Cataclysm/TolBarad_MoltenFront.lua",
+      "reported_count": 28,
+      "actual_count": 28,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "TheBurningCrusade_Alliance.lua",
+      "path": "Routes/TheBurningCrusade/TheBurningCrusade_Alliance.lua",
+      "reported_count": 18,
+      "actual_count": 18,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "TheBurningCrusade_Horde.lua",
+      "path": "Routes/TheBurningCrusade/TheBurningCrusade_Horde.lua",
+      "reported_count": 31,
+      "actual_count": 31,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "AzjKahet.lua",
+      "path": "Routes/TheWarWithin/AzjKahet.lua",
+      "reported_count": 23,
+      "actual_count": 23,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "RingingDeeps.lua",
+      "path": "Routes/TheWarWithin/RingingDeeps.lua",
+      "reported_count": 22,
+      "actual_count": 22,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Hallowfall.lua",
+      "path": "Routes/TheWarWithin/Hallowfall.lua",
+      "reported_count": 22,
+      "actual_count": 22,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "delves.lua",
+      "path": "Routes/TheWarWithin/delves.lua",
+      "reported_count": 0,
+      "actual_count": 0,
+      "issues": [
+        "zero_quest_count"
+      ]
+    },
+    {
+      "route_file": "TheWarWithin.lua",
+      "path": "Routes/TheWarWithin/TheWarWithin.lua",
+      "reported_count": 703,
+      "actual_count": 703,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "IsleOfDorn.lua",
+      "path": "Routes/TheWarWithin/IsleOfDorn.lua",
+      "reported_count": 22,
+      "actual_count": 22,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "EasternKingdoms_Alliance.lua",
+      "path": "Routes/Vanilla/EasternKingdoms_Alliance.lua",
+      "reported_count": 861,
+      "actual_count": 861,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "EasternKingdoms_Horde.lua",
+      "path": "Routes/Vanilla/EasternKingdoms_Horde.lua",
+      "reported_count": 199,
+      "actual_count": 199,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Kalimdor_Horde.lua",
+      "path": "Routes/Vanilla/Kalimdor_Horde.lua",
+      "reported_count": 222,
+      "actual_count": 222,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Kalimdor_Alliance.lua",
+      "path": "Routes/Vanilla/Kalimdor_Alliance.lua",
+      "reported_count": 878,
+      "actual_count": 878,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "10-70-Ally-EclipseGlaives.lua",
+      "path": "Routes/Custom/10-70-Ally-EclipseGlaives.lua",
+      "reported_count": 311,
+      "actual_count": 311,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Shadowlands_Horde.lua",
+      "path": "Routes/Shadowlands/Shadowlands_Horde.lua",
+      "reported_count": 300,
+      "actual_count": 300,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Korthia_ZerethMortis.lua",
+      "path": "Routes/Shadowlands/Korthia_ZerethMortis.lua",
+      "reported_count": 25,
+      "actual_count": 25,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Shadowlands.lua",
+      "path": "Routes/Shadowlands/Shadowlands.lua",
+      "reported_count": 369,
+      "actual_count": 369,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    },
+    {
+      "route_file": "Shadowlands_Alliance.lua",
+      "path": "Routes/Shadowlands/Shadowlands_Alliance.lua",
+      "reported_count": 300,
+      "actual_count": 300,
+      "issues": [
+        "bracketed_numeric_keys"
+      ]
+    }
+  ]
+}
