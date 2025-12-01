@@ -1,0 +1,123 @@
+## Interface: 110000, 110002, 110005, 110007, 110100, 110105, 110107, 110200, 110205, 110207
+
+## Title: Azeroth Pilot Reloaded |cff00ff00[Modern]|r
+## Notes: Modern v5.0.0 - Complete rewrite with modern architecture
+## Author: Core: Neogeekmo, Rycia, Kamian, SuperNinja AI | Route: Pahonix, Neogeekmo
+## IconTexture: Interface\AddOns\APR\APR-Core\assets\APR_logo
+## Version: 5.0.0-alpha
+
+## SavedVariables: APRState, APRConfig, APRData, APRCustomPath, APRZoneCompleted, APRTaxiNodes, APRTaxiNodesTimer, APRScenarioCompleted, APRScenarioMapIDCompleted, APRItemLooted, APRGossipValidated
+
+## Category-enUS: Quests
+## Category-deDE: Quests
+## Category-esES: Misiones
+## Category-esMX: Misiones
+## Category-frFR: Quêtes
+## Category-itIT: Missioni
+## Category-koKR: 퀘스트
+## Category-ptBR: Missões
+## Category-ruRU: Задания
+## Category-zhCN: 任务
+## Category-zhTW: 任務
+
+## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
+## X-Github: https://github.com/Azeroth-Pilot-Reloaded/azeroth-pilot-reloaded
+## X-Discord: https://discord.gg/YgcdybKdWX
+## X-Curse-Project-ID: 618667
+## X-WoWI-ID: 26457
+## X-Wago-ID: XKq9xXKy
+
+# ====================================
+# MODERN CORE FRAMEWORK (v5.0.0)
+# ====================================
+
+# Core Systems (Load First)
+APR-Core/Logger.lua
+APR-Core/Bootstrap.lua
+APR-Core/EventBus.lua
+APR-Core/StateManager.lua
+APR-Core/ConfigManager.lua
+
+# Quest System
+APR-Core/Quest/QuestManager.lua
+APR-Core/Quest/QuestStateMachine.lua
+APR-Core/Quest/QuestOrderer.lua
+
+# Route System
+APR-Core/Route/RouteManager.lua
+
+# ====================================
+# LEGACY COMPATIBILITY LAYER
+# ====================================
+# (To be implemented - provides backward compatibility)
+
+# ====================================
+# LIBRARIES (Ace3)
+# ====================================
+APR-Core/libs/embeds.xml
+APR-Core/libs/HereBeDragons/HereBeDragons-2.0.lua
+APR-Core/libs/HereBeDragons/HereBeDragons-Pins-2.0.lua
+
+# ====================================
+# LOCALIZATION
+# ====================================
+APR-Core/locales/locales.xml
+
+# ====================================
+# LEGACY CORE (Temporary - will be migrated)
+# ====================================
+APR-Core/Core.lua
+
+# Utilities
+APR-Core/utils/Utils.lua
+APR-Core/utils/BuyMerchant.lua
+APR-Core/utils/PlayerPosition.lua
+APR-Core/utils/SceneCutter.lua
+APR-Core/utils/CoordinateFrame.lua
+APR-Core/utils/StepHelper.lua
+
+# Data Models
+APR-Core/data/models/Classes.lua
+APR-Core/data/models/Enums.lua
+APR-Core/data/models/Quest.lua
+APR-Core/data/models/Spells.lua
+
+# Data Routes
+APR-Core/data/routes/AllianceRoutes.lua
+APR-Core/data/routes/HordeRoutes.lua
+APR-Core/data/routes/NeutralRoutes.lua
+APR-Core/data/zones/Portals.lua
+APR-Core/data/zones/TaxiNodes.lua
+APR-Core/data/zones/ZoneOrder.lua
+
+# Configuration
+APR-Core/Config.lua
+APR-Core/Config_Route.lua
+APR-Core/Commands.lua
+APR-Core/ChangeLog.lua
+
+# Legacy Event System (will be migrated to EventBus)
+APR-Core/Event.lua
+
+# Legacy Quest System (will be migrated to QuestManager)
+APR-Core/QuestHandler.lua
+APR-Core/Transport.lua
+
+# UI Components (will be modernized)
+APR-Core/Arrow.lua
+APR-Core/CurrentStep.lua
+APR-Core/QuestionPopUp.lua
+APR-Core/QuestOrderList.lua
+APR-Core/Gossip.lua
+APR-Core/Party.lua
+APR-Core/Map.lua
+APR-Core/AFK.lua
+APR-Core/Heirloom.lua
+APR-Core/RouteSelection.lua
+APR-Core/Buff.lua
+APR-Core/StatusReport.lua
+
+# ====================================
+# ROUTES
+# ====================================
+Routes/RouteList.xml
